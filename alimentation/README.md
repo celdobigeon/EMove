@@ -9,6 +9,11 @@ Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise 
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
 
+## Batteries Manly (option B) : documents du fabricant
+
+- [Fiche technique MLP2450A, 25,6 V 50 Ah](batteries_manly/MANLY_25.6V_50Ah_Datasheet.pdf)
+- [Protocole CAN du BMS (JBD)](batteries_manly/CAN_JBD.pdf) : 250 kbit/s, ID standard de 0x100 à 0x112, interrogation par trame « remote » (RTR), CRC-16 Modbus. Les deux batteries répondent aux mêmes ID : voir la section « Devis Manly » du [PDF](Alimentation_cablage.pdf).
+
 ## Schéma de câblage
 
 ![Schéma de câblage](schema_cablage.svg)
