@@ -1,0 +1,55 @@
+# Alimentation et câblage
+
+Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise de recharge.
+
+- **Circuit A, traction** : BAT-A alimente les 4 roues. L'arrêt d'urgence mécanique (contacteur K1) coupe ce circuit, et ce circuit seulement.
+- **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ainsi que ses périphériques.
+- **Recharge** : le chargeur se branche sur le socle X2. Le répartiteur D1 recharge les deux batteries en même temps. Tant que le chargeur est branché, le relais K3 bloque la traction.
+- **CAN** : la voie 1 du CANalyst-II pilote les roues. La voie 2 lit les BMS des batteries Manly (option B, 250 kbit/s).
+
+Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
+
+## Schéma de câblage
+
+![Schéma de câblage](schema_cablage.svg)
+
+## Nomenclature
+
+**Déjà possédé**
+
+| Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
+|---|---|---|---|---|---|---|
+| M1–M4 | Roues motorisées | RoboCT CTM300-7 (24 V) | 4 | Déjà en place sur la plateforme. | — | [RoboCT](https://www.roboct-global.com/mobile-robot-components/mecanum-wheel/mecanum-omni-wheel.html) |
+| U1 | Calculateur | NVIDIA Jetson AGX Thor, kit de développement (T5000) | 1 | Alimenté par son entrée Micro-Fit 9–28 V continu (8 A max), à travers U4. Vérifier le brochage du connecteur Micro-Fit dans le guide NVIDIA. | — | [Amazon](https://www.amazon.fr/dp/B0FTM2LXSF) |
+| U3 | Interface USB-CAN | CANalyst-II (ZLGCANpro) | 1 | Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : bus des BMS Manly (option B), à 250 kbit/s. Sous Linux, pilote non officiel `python-can[canalystii]` (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson. | — | [Amazon](https://www.amazon.fr/dp/B07WC1XX1S) |
+
+**Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)**
+
+| Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
+|---|---|---|---|---|---|---|
+| CH1 | Chargeur 24 V | Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441) | 1 | Programme LiFePO4 (28,4 V), Bluetooth. Convient aux deux options de batteries. Reste hors de la plateforme. | 195,83 € HT | [lien](https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html) |
+| D1 | Répartiteur de charge | Victron Argo FET 100-3, ARG100301020R (Conrad 1846191) | 1 | 2 sorties utilisées. Relier sa borne GND au 0 V. | ≈ 115 € (est.) | [lien](https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html) |
+| U4 | Convertisseur isolé 24 → 24 V | Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865) | 1 | Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A). | ≈ 140–190 € (est.) | [lien](https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865) |
+| U2 | Convertisseur isolé 24 → 12 V | Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873) | 1 | Pour les équipements en 12 V. Facultatif. | ≈ 70 € (est.) | [lien](https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html) |
+| S1, S2 | Coupe-batteries | Victron 275 A, VBS127010010 | 2 | Placés après le point de charge : les batteries se rechargent même interrupteurs ouverts. | 47,99 € pièce | [rayon Victron](https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html) |
+| F0, F1, F2 | Porte-fusibles MIDI | Victron CIP000050001 | 3 | Au plus près des bornes + (F1, F2) et derrière X2 (F0). Fusibles MIDI : 50 A pour F1, 30 A pour F0 et F2. | 16,99 € pièce + fusibles | [rayon Victron](https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html) |
+| DB-A, DB-B | Distribution à fusibles | Barre Victron VBB125040010 (Conrad 2497142) et porte-fusibles pour fusibles plats standard, 32 V | 1 + 7 | La barre sert de répartiteur pour la traction ; chaque départ a son porte-fusible plat. DB-A : 4 × 15 A. DB-B : 20 A (U4), 5 A (U2), 10 A (réserve). | ≈ 60 € (est.) | [barre](https://www.conrad.fr/fr/p/victron-energy-bus-bar-vbb125040010-plaque-de-montage-2497142.html) · [porte-fusibles](https://www.conrad.fr/fr/f/porte-fusible-plat-1838146.html) |
+| X1, X2 | Connecteur de charge | Connecteur de batterie à courant fort 50 A (Conrad 1229364) | 2 | X1 au bout du câble du chargeur, X2 fixé sur la paroi. | ≈ 10 € pièce (est.) | [lien](https://www.conrad.fr/fr/p/connecteur-de-batterie-a-courant-fort-50-a-1229364-1-pc-s-1229364.html) |
+| ES | Arrêt d'urgence | Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553) | 1 | Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson). | ≈ 40 € (est.) | [lien](https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553) |
+| K3 | Relais de détection de charge | Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788) | 1 | Utiliser le contact NF de l'inverseur. | 17,49 € HT | [lien](https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html) |
+| — | Câblage | Câble souple rouge et noir, câble CAN blindé, cosses | — | 10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (deux bus avec l'option B). | ≈ 100–145 € (est.) | [Conrad](https://www.conrad.fr/) |
+
+**Fournisseur 2 : batteries, deux options au choix**
+
+| Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
+|---|---|---|---|---|---|---|
+| Option A | Batterie LiFePO4 25,6 V 50 Ah (Wattuneed) | PowerTech Systems PowerBrick+ PB+24/50 (marque française) | 2 | BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg. | 685 € TTC pièce | [lien](https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html) |
+| Option B | Batterie LiFePO4 25,6 V 50 Ah (Manly) | Manly MLP2450A avec CAN (protocole BMS JBD) | 2 | **Avantage : le niveau de charge se lit sur le bus CAN**, donc par le Jetson. BMS 50 A en continu, 60 A en pointe (< 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport. | 298 USD pièce 994 USD les 2, port DDP compris | [lien](https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html) · [gamme robots](https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html) |
+
+**Fournisseur 3 : RS Components France**
+
+| Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
+|---|---|---|---|---|---|---|
+| K1 | Contacteur de puissance | Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538) | 1 | Seul article introuvable chez Conrad. Délai de livraison à vérifier. | 161,08 € HT | [lien](https://fr.rs-online.com/web/p/contacteurs/1058538) |
+
+Les références sont des exemples à confirmer auprès des fournisseurs avant la commande. Les prix ont été relevés en novembre 2026 et n'incluent pas toujours la livraison.

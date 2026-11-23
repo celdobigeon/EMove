@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Alimentation plateforme mecanum</title>
+<style>
+  :root {
+    --bg: #ffffff; --fg: #1d1d1f; --muted: #5f6368; --line: #d0d4da; --card: #f6f7f9;
+    --pos: #d0312d; --neg: #1d1d1f; --cmd: #1f6fd1; --can: #138a4b; --usb: #8a8f98; --acc: #b26a00;
+  }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: var(--bg); color: var(--fg); font: 15px/1.5 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; }
+  main { max-width: 1320px; margin: 0 auto; padding: 24px 16px 48px; }
+  h1 { font-size: 26px; margin: 0 0 4px; }
+  h2 { font-size: 19px; margin: 32px 0 10px; border-bottom: 1px solid var(--line); padding-bottom: 4px; }
+  .sub { color: var(--muted); margin: 0 0 16px; }
+  .grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 12px; }
+  .card { background: var(--card); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; }
+  .card h3 { margin: 0 0 6px; font-size: 15px; }
+  .card p, .card ul { margin: 0; }
+  .card ul { padding-left: 18px; }
+  .scroll { overflow-x: auto; border: 1px solid var(--line); border-radius: 8px; background: #fff; }
+  svg.sch { display: block; min-width: 1100px; width: 100%; height: auto; }
+  table { border-collapse: collapse; width: 100%; font-size: 14px; }
+  th, td { border-bottom: 1px solid var(--line); padding: 6px 8px; text-align: left; vertical-align: top; }
+  th { background: var(--card); }
+  td.r { white-space: nowrap; font-weight: 600; }
+  td a { color: var(--cmd); }
+  .tag { display: inline-block; padding: 0 6px; border-radius: 4px; font-size: 12px; background: #eef3fb; color: var(--cmd); }
+  .warn { border-left: 4px solid var(--acc); }
+  ol li, ul li { margin-bottom: 4px; }
+  /* schéma */
+  .box { fill: #fff; stroke: #333; stroke-width: 1.4; }
+  .bat { fill: #fff6e5; stroke: #333; stroke-width: 1.4; }
+  .load { fill: #eef3fb; stroke: #333; stroke-width: 1.2; }
+  .fuse { fill: #fff; stroke: #333; stroke-width: 1.2; }
+  .pos { stroke: var(--pos); stroke-width: 2.6; fill: none; }
+  .neg { stroke: var(--neg); stroke-width: 2.6; fill: none; }
+  .cmd { stroke: var(--cmd); stroke-width: 1.6; fill: none; }
+  .can { stroke: var(--can); stroke-width: 2; fill: none; stroke-dasharray: 8 5; }
+  .usb { stroke: var(--usb); stroke-width: 1.6; fill: none; stroke-dasharray: 4 4; }
+  .panel { stroke: #888; stroke-width: 1.5; stroke-dasharray: 6 4; }
+  .zone { fill: none; stroke: #b9bec6; stroke-width: 1; stroke-dasharray: 3 4; }
+  text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1d1d1f; }
+  .t { font-size: 12px; }
+  .ts { font-size: 10.5px; fill: #444; }
+  .b { font-weight: 700; }
+  .zt { font-size: 13px; font-weight: 700; fill: #6b7280; }
+  @page { size: A4 landscape; margin: 10mm; }
+  @media print {
+    main { max-width: none; padding: 0; }
+    body { font-size: 11px; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+    h1 { font-size: 20px; }
+    h2 { font-size: 15px; margin-top: 18px; break-after: avoid; }
+    .scroll { overflow: visible; border: none; }
+    svg.sch { min-width: 0; width: auto; height: 132mm; margin: 0 auto; break-inside: avoid; }
+    .grid { gap: 8px; }
+    .card { padding: 8px 10px; }
+    table { font-size: 10px; }
+    th, td { padding: 3px 5px; }
+    tr, .card { break-inside: avoid; }
+    a { color: var(--cmd); }
+  }
+</style>
+</head>
+<body>
+<main>
+<h1>Alimentation et câblage de la plateforme</h1>
+<p class="sub">4 roues mecanum RoboCT CTM300-7 (24 V) et kit NVIDIA Jetson AGX Thor. Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise de recharge.</p>
+
+<div class="grid">
+  <div class="card"><h3>Circuit A : traction</h3><p>BAT-A alimente les 4 roues. L'arrêt d'urgence coupe ce circuit, et ce circuit seulement.</p></div>
+  <div class="card"><h3>Circuit B : calcul</h3><p>BAT-B alimente le Jetson et ses équipements (caméras, lidar, routeur). L'arrêt d'urgence ne le coupe pas, pour que le Jetson s'arrête proprement.</p></div>
+  <div class="card"><h3>Recharge : une seule prise</h3><p>On branche le chargeur sur le socle X2. Le répartiteur D1 recharge les deux batteries en même temps sans les relier entre elles. Tant que le chargeur est branché, le relais K3 bloque la traction.</p></div>
+</div>
+
+<h2>Schéma de câblage</h2>
+<div class="scroll">
+<svg class="sch" viewBox="0 0 1310 830" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Schéma de câblage de l'alimentation">
+  <defs>
+    <g id="gnd"><path d="M0 0 v8 M-9 8 h18 M-6 12 h12 M-3 16 h6" stroke="#1d1d1f" stroke-width="1.6" fill="none"/></g>
+  </defs>
+
+  <!-- ============ ZONE RECHARGE ============ -->
+  <rect x="20" y="18" width="770" height="190" class="zone"/>
+  <text x="30" y="36" class="zt">RECHARGE</text>
+
+  <!-- Chargeur -->
+  <rect x="40" y="50" width="190" height="95" class="box"/>
+  <text x="135" y="72" class="t b" text-anchor="middle">CH1 Chargeur</text>
+  <text x="135" y="89" class="ts" text-anchor="middle">Victron Blue Smart IP22 24/16 (1)</text>
+  <text x="135" y="104" class="ts" text-anchor="middle">mode LiFePO4, 28,4 V</text>
+  <text x="135" y="119" class="ts" text-anchor="middle">entrée 230 V ~</text>
+  <text x="135" y="135" class="ts" text-anchor="middle">(reste hors plateforme)</text>
+  <path d="M230 80 H300" class="pos"/><text x="262" y="74" class="ts" text-anchor="middle">+</text>
+  <path d="M230 115 H300" class="neg"/><text x="262" y="110" class="ts" text-anchor="middle">−</text>
+
+  <!-- X1 / X2 -->
+  <text x="342" y="46" class="t b" text-anchor="middle">X1 / X2 Anderson SB50</text>
+  <rect x="300" y="62" width="36" height="70" class="box"/>
+  <text x="318" y="150" class="ts" text-anchor="middle">X1 fiche</text>
+  <line x1="342" y1="52" x2="342" y2="200" class="panel"/>
+  <rect x="348" y="62" width="36" height="70" class="box"/>
+  <text x="366" y="150" class="ts" text-anchor="middle">X2 socle</text>
+  <text x="336" y="198" class="ts" text-anchor="end">paroi de la plateforme</text>
+
+  <!-- + après X2 : F0 vers D1 -->
+  <path d="M384 80 H422" class="pos"/>
+  <circle cx="402" cy="80" r="3.2" fill="var(--pos)"/>
+  <rect x="422" y="73" width="46" height="14" class="fuse"/><line x1="422" y1="80" x2="468" y2="80" stroke="#333" stroke-width="1"/>
+  <text x="445" y="67" class="ts" text-anchor="middle">F0 30 A</text>
+  <path d="M468 80 H560" class="pos"/>
+  <text x="514" y="74" class="ts" text-anchor="middle">6 mm²</text>
+  <!-- − de X2 -->
+  <path d="M384 115 H420" class="neg"/><use href="#gnd" x="420" y="115"/>
+  <text x="432" y="128" class="ts">0 V</text>
+
+  <!-- K3 bobine -->
+  <path d="M402 80 V150" class="cmd"/>
+  <rect x="388" y="150" width="28" height="22" class="box"/>
+  <text x="402" y="165" class="ts" text-anchor="middle">K3</text>
+  <path d="M402 172 V180" class="cmd"/><use href="#gnd" x="402" y="180"/>
+  <text x="424" y="158" class="ts">K3 : relais de détection</text>
+  <text x="424" y="172" class="ts">de charge (bobine 24 V)</text>
+
+  <!-- D1 Argo FET -->
+  <rect x="560" y="50" width="175" height="95" class="box"/>
+  <text x="647" y="72" class="t b" text-anchor="middle">D1 Répartiteur de charge</text>
+  <text x="647" y="89" class="ts" text-anchor="middle">Victron Argo FET 100-3</text>
+  <text x="647" y="104" class="ts" text-anchor="middle">(ARG100301020)</text>
+  <text x="566" y="77" class="ts">in</text>
+  <text x="600" y="139" class="ts" text-anchor="middle">1</text>
+  <text x="690" y="139" class="ts" text-anchor="middle">2</text>
+  <text x="728" y="122" class="ts" text-anchor="end">GND</text>
+  <path d="M735 118 H762" class="neg"/><use href="#gnd" x="762" y="118"/>
+
+  <!-- sorties D1 -->
+  <path d="M600 145 V232 H245 V320" class="pos"/>
+  <text x="420" y="226" class="ts" text-anchor="middle">charge BAT-A · 6 mm²</text>
+  <path d="M690 145 V232 H905 V320" class="pos"/>
+  <text x="800" y="226" class="ts" text-anchor="middle">charge BAT-B · 6 mm²</text>
+
+  <!-- ============ CIRCUIT A ============ -->
+  <rect x="20" y="250" width="655" height="380" class="zone"/>
+  <text x="30" y="268" class="zt">CIRCUIT A : TRACTION</text>
+
+  <rect x="40" y="290" width="110" height="110" class="bat"/>
+  <text x="95" y="312" class="t b" text-anchor="middle">BAT-A</text>
+  <text x="95" y="330" class="ts" text-anchor="middle">LiFePO4</text>
+  <text x="95" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
+  <text x="95" y="360" class="ts" text-anchor="middle">A : PowerBrick+</text>
+  <text x="95" y="375" class="ts" text-anchor="middle">B : Manly + CAN</text>
+  <text x="142" y="316" class="ts">+</text><text x="142" y="390" class="ts">−</text>
+
+  <path d="M150 320 H170" class="pos"/>
+  <rect x="170" y="313" width="45" height="14" class="fuse"/><line x1="170" y1="320" x2="215" y2="320" stroke="#333" stroke-width="1"/>
+  <text x="192" y="306" class="ts" text-anchor="middle">F1 50 A</text>
+  <path d="M215 320 H283" class="pos"/>
+  <circle cx="245" cy="320" r="3.2" fill="var(--pos)"/>
+  <!-- S1 -->
+  <circle cx="285" cy="320" r="2.5" fill="#333"/>
+  <path d="M285 320 L316 304" class="pos"/>
+  <circle cx="320" cy="320" r="2.5" fill="#333"/>
+  <text x="302" y="296" class="ts" text-anchor="middle">S1 coupe-batterie</text>
+  <path d="M320 320 H378" class="pos"/>
+  <circle cx="345" cy="320" r="3.2" fill="var(--pos)"/>
+  <!-- K1 contacts -->
+  <circle cx="380" cy="320" r="2.5" fill="#333"/>
+  <path d="M380 320 L410 306" class="pos"/>
+  <circle cx="414" cy="320" r="2.5" fill="#333"/>
+  <text x="397" y="296" class="ts" text-anchor="middle">K1 contacteur</text>
+  <path d="M414 320 H466" class="pos"/>
+  <text x="440" y="314" class="ts" text-anchor="middle">10 mm²</text>
+
+  <!-- boucle d'arrêt d'urgence -->
+  <path d="M345 320 V385" class="cmd"/>
+  <rect x="328" y="385" width="34" height="26" class="box"/>
+  <text x="345" y="402" class="ts" text-anchor="middle">ES</text>
+  <path d="M345 411 V440" class="cmd"/>
+  <rect x="328" y="440" width="34" height="22" class="box"/>
+  <text x="345" y="455" class="ts" text-anchor="middle">K3</text>
+  <path d="M345 462 V490" class="cmd"/>
+  <rect x="331" y="490" width="28" height="24" class="box"/>
+  <text x="345" y="506" class="ts" text-anchor="middle">K1</text>
+  <path d="M345 514 V528" class="cmd"/><use href="#gnd" x="345" y="528"/>
+  <text x="368" y="398" class="ts">ES : arrêt d'urgence</text>
+  <text x="368" y="411" class="ts">coup de poing (NF)</text>
+  <text x="368" y="455" class="ts">K3 contact NF</text>
+  <text x="368" y="500" class="ts">K1 bobine 24 V</text>
+  <text x="368" y="513" class="ts">(traction ON si ES</text>
+  <text x="368" y="526" class="ts">relâché et chargeur</text>
+  <text x="368" y="539" class="ts">débranché)</text>
+
+  <!-- DB-A -->
+  <rect x="466" y="300" width="9" height="290" fill="var(--pos)"/>
+  <text x="470" y="610" class="ts" text-anchor="middle">DB-A bloc fusibles</text>
+  <g>
+    <path d="M475 330 H490" class="pos"/><rect x="490" y="323" width="40" height="14" class="fuse"/><line x1="490" y1="330" x2="530" y2="330" stroke="#333" stroke-width="1"/>
+    <text x="510" y="318" class="ts" text-anchor="middle">F11 15 A</text><path d="M530 330 H560" class="pos"/>
+    <rect x="560" y="308" width="92" height="44" class="load"/><text x="606" y="327" class="t b" text-anchor="middle">M1 CTM300-7</text><text x="606" y="343" class="ts" text-anchor="middle">AV gauche</text>
+  </g>
+  <g>
+    <path d="M475 410 H490" class="pos"/><rect x="490" y="403" width="40" height="14" class="fuse"/><line x1="490" y1="410" x2="530" y2="410" stroke="#333" stroke-width="1"/>
+    <text x="510" y="398" class="ts" text-anchor="middle">F12 15 A</text><path d="M530 410 H560" class="pos"/>
+    <rect x="560" y="388" width="92" height="44" class="load"/><text x="606" y="407" class="t b" text-anchor="middle">M2 CTM300-7</text><text x="606" y="423" class="ts" text-anchor="middle">AV droite</text>
+  </g>
+  <g>
+    <path d="M475 490 H490" class="pos"/><rect x="490" y="483" width="40" height="14" class="fuse"/><line x1="490" y1="490" x2="530" y2="490" stroke="#333" stroke-width="1"/>
+    <text x="510" y="478" class="ts" text-anchor="middle">F13 15 A</text><path d="M530 490 H560" class="pos"/>
+    <rect x="560" y="468" width="92" height="44" class="load"/><text x="606" y="487" class="t b" text-anchor="middle">M3 CTM300-7</text><text x="606" y="503" class="ts" text-anchor="middle">AR gauche</text>
+  </g>
+  <g>
+    <path d="M475 570 H490" class="pos"/><rect x="490" y="563" width="40" height="14" class="fuse"/><line x1="490" y1="570" x2="530" y2="570" stroke="#333" stroke-width="1"/>
+    <text x="510" y="558" class="ts" text-anchor="middle">F14 15 A</text><path d="M530 570 H560" class="pos"/>
+    <rect x="560" y="548" width="92" height="44" class="load"/><text x="606" y="567" class="t b" text-anchor="middle">M4 CTM300-7</text><text x="606" y="583" class="ts" text-anchor="middle">AR droite</text>
+  </g>
+  <text x="594" y="618" class="ts" text-anchor="middle">câbles 2,5 mm² · retours − → barre 0 V</text>
+
+  <!-- ============ CIRCUIT B ============ -->
+  <rect x="685" y="250" width="605" height="380" class="zone"/>
+  <text x="695" y="268" class="zt">CIRCUIT B : CALCUL</text>
+
+  <rect x="700" y="290" width="110" height="110" class="bat"/>
+  <text x="755" y="312" class="t b" text-anchor="middle">BAT-B</text>
+  <text x="755" y="330" class="ts" text-anchor="middle">LiFePO4</text>
+  <text x="755" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
+  <text x="755" y="360" class="ts" text-anchor="middle">A : PowerBrick+</text>
+  <text x="755" y="375" class="ts" text-anchor="middle">B : Manly + CAN</text>
+  <text x="802" y="316" class="ts">+</text><text x="802" y="390" class="ts">−</text>
+
+  <path d="M810 320 H830" class="pos"/>
+  <rect x="830" y="313" width="45" height="14" class="fuse"/><line x1="830" y1="320" x2="875" y2="320" stroke="#333" stroke-width="1"/>
+  <text x="852" y="306" class="ts" text-anchor="middle">F2 30 A</text>
+  <path d="M875 320 H943" class="pos"/>
+  <circle cx="905" cy="320" r="3.2" fill="var(--pos)"/>
+  <circle cx="945" cy="320" r="2.5" fill="#333"/>
+  <path d="M945 320 L976 304" class="pos"/>
+  <circle cx="980" cy="320" r="2.5" fill="#333"/>
+  <text x="962" y="296" class="ts" text-anchor="middle">S2 coupe-batterie</text>
+  <path d="M980 320 H1026" class="pos"/>
+  <text x="1003" y="314" class="ts" text-anchor="middle">6 mm²</text>
+
+  <rect x="1026" y="300" width="9" height="230" fill="var(--pos)"/>
+  <text x="1030" y="548" class="ts" text-anchor="middle">DB-B bloc fusibles</text>
+
+  <path d="M1035 330 H1048" class="pos"/><rect x="1048" y="323" width="40" height="14" class="fuse"/><line x1="1048" y1="330" x2="1088" y2="330" stroke="#333" stroke-width="1"/>
+  <text x="1068" y="318" class="ts" text-anchor="middle">F21 20 A</text><path d="M1088 330 H1108" class="pos"/>
+  <rect x="1108" y="300" width="170" height="86" class="load"/>
+  <line x1="1116" y1="358" x2="1270" y2="358" stroke="#333" stroke-width="0.8" stroke-dasharray="3 3"/>
+  <text x="1193" y="318" class="t b" text-anchor="middle">U4 Orion-Tr 24/24-12 isolé</text>
+  <text x="1193" y="334" class="ts" text-anchor="middle">sortie 24,0 V stabilisée</text>
+  <text x="1193" y="350" class="ts" text-anchor="middle">7 A max · 2,5 mm²</text>
+  <text x="1193" y="372" class="t b" text-anchor="middle">U1 kit Jetson AGX Thor</text>
+  <text x="1193" y="383" class="ts" text-anchor="middle">entrée Micro-Fit 9–28 V</text>
+
+  <path d="M1035 420 H1048" class="pos"/><rect x="1048" y="413" width="40" height="14" class="fuse"/><line x1="1048" y1="420" x2="1088" y2="420" stroke="#333" stroke-width="1"/>
+  <text x="1068" y="408" class="ts" text-anchor="middle">F22 5 A</text><path d="M1088 420 H1108" class="pos"/>
+  <rect x="1108" y="392" width="170" height="58" class="load"/>
+  <text x="1193" y="411" class="t b" text-anchor="middle">U2 DC-DC isolé 24→12 V</text>
+  <text x="1193" y="427" class="ts" text-anchor="middle">Victron Orion-Tr 24/12-10</text>
+  <text x="1193" y="442" class="ts" text-anchor="middle">→ caméras, lidar, routeur</text>
+
+  <path d="M1035 500 H1048" class="pos"/><rect x="1048" y="493" width="40" height="14" class="fuse"/><line x1="1048" y1="500" x2="1088" y2="500" stroke="#333" stroke-width="1"/>
+  <text x="1068" y="488" class="ts" text-anchor="middle">F23 10 A</text><path d="M1088 500 H1108" class="pos"/>
+  <text x="1114" y="504" class="ts">réserve (24 V périphériques)</text>
+
+  <rect x="1108" y="545" width="170" height="52" class="load"/>
+  <text x="1193" y="562" class="t b" text-anchor="middle">U3 interface USB-CAN</text>
+  <text x="1193" y="576" class="ts" text-anchor="middle">CANalyst-II (déjà possédée)</text>
+  <text x="1193" y="590" class="ts" text-anchor="middle">voie 1 : roues · voie 2 : BMS</text>
+  <path d="M1278 331 H1294 V571 H1278" class="usb"/>
+  <text x="1298" y="455" class="ts" transform="rotate(90 1298 455)" text-anchor="middle">USB</text>
+  <text x="960" y="618" class="ts" text-anchor="middle">retours − du circuit B → barre 0 V</text>
+
+  <!-- ============ BUS CAN 1 : roues (voie 1 de U3) ============ -->
+  <path d="M652 330 H664 M652 410 H664 M652 490 H664 M652 570 H664 M664 330 V665 H1240 V597" class="can"/>
+  <text x="640" y="682" class="ts">120 Ω</text>
+  <text x="1246" y="625" class="ts">120 Ω</text>
+  <text x="985" y="682" class="ts" text-anchor="middle" fill="var(--can)">Bus CAN 1 (débit des roues, CANopen) : roues M1–M4 ↔ U3 voie 1</text>
+
+  <!-- ============ BUS CAN 2 : BMS des batteries Manly (option B, voie 2 de U3) ============ -->
+  <g opacity="0.7">
+    <path d="M95 400 V650 H656 a8 8 0 0 1 16 0 H1160 V597 M755 400 V650" class="can"/>
+    <circle cx="755" cy="650" r="3" fill="var(--can)"/>
+  </g>
+  <text x="101" y="644" class="ts">120 Ω</text>
+  <text x="1154" y="625" class="ts" text-anchor="end">120 Ω</text>
+  <text x="400" y="667" class="ts" text-anchor="middle" fill="var(--can)">Bus CAN 2, 250 kbit/s (option B Manly) : BMS de BAT-A et BAT-B ↔ U3 voie 2</text>
+  <text x="400" y="681" class="ts" text-anchor="middle">les deux BMS ont les mêmes ID : voir « Devis Manly »</text>
+
+  <!-- ============ BARRE 0 V ============ -->
+  <path d="M150 385 H170 V735" class="neg"/>
+  <path d="M810 385 H830 V735" class="neg"/>
+  <rect x="40" y="735" width="1240" height="9" fill="var(--neg)"/>
+  <text x="660" y="762" class="t b" text-anchor="middle">Barre 0 V commune (un seul point de liaison) : − BAT-A (10 mm²), − BAT-B (6 mm²), − X2, GND D1, retours − des charges</text>
+
+  <!-- ============ LÉGENDE ============ -->
+  <g transform="translate(40 790)">
+    <path d="M0 0 H30" class="pos"/><text x="38" y="4" class="ts">+24 V puissance</text>
+    <path d="M150 0 H180" class="neg"/><text x="188" y="4" class="ts">0 V</text>
+    <path d="M240 0 H270" class="cmd"/><text x="278" y="4" class="ts">commande (bobines)</text>
+    <path d="M410 0 H440" class="can"/><text x="448" y="4" class="ts">bus CAN</text>
+    <path d="M520 0 H550" class="usb"/><text x="558" y="4" class="ts">USB</text>
+    <use href="#gnd" x="620" y="-6"/><text x="634" y="4" class="ts">vers la barre 0 V</text>
+    <rect x="760" y="-7" width="30" height="14" class="fuse"/><line x1="760" y1="0" x2="790" y2="0" stroke="#333" stroke-width="1"/><text x="798" y="4" class="ts">fusible</text>
+  </g>
+</svg>
+</div>
+
+<h2>Nomenclature</h2>
+<div class="scroll">
+<table>
+  <thead><tr><th>Repère</th><th>Désignation</th><th>Référence</th><th>Qté</th><th>Caractéristiques, remarques</th><th>Prix indicatif</th><th>Lien</th></tr></thead>
+  <tbody>
+    <tr><td colspan="7"><span class="tag">Déjà possédé</span></td></tr>
+    <tr><td class="r">M1–M4</td><td>Roues motorisées</td><td>RoboCT CTM300-7 (24 V)</td><td>4</td><td>Déjà en place sur la plateforme.</td><td>—</td><td><a href="https://www.roboct-global.com/mobile-robot-components/mecanum-wheel/mecanum-omni-wheel.html" target="_blank" rel="noopener">RoboCT</a></td></tr>
+    <tr><td class="r">U1</td><td>Calculateur</td><td>NVIDIA Jetson AGX Thor, kit de développement (T5000)</td><td>1</td><td>Alimenté par son entrée Micro-Fit 9–28 V continu (8 A max), à travers U4. Vérifier le brochage du connecteur Micro-Fit dans le guide NVIDIA.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B0FTM2LXSF" target="_blank" rel="noopener">Amazon</a></td></tr>
+    <tr><td class="r">U3</td><td>Interface USB-CAN</td><td>CANalyst-II (ZLGCANpro)</td><td>1</td><td>Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : bus des BMS Manly (option B), à 250 kbit/s. Sous Linux, pilote non officiel <code>python-can[canalystii]</code> (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B07WC1XX1S" target="_blank" rel="noopener">Amazon</a></td></tr>
+
+    <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)</span></td></tr>
+    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux deux options de batteries. Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">D1</td><td>Répartiteur de charge</td><td>Victron Argo FET 100-3, ARG100301020R (Conrad 1846191)</td><td>1</td><td>2 sorties utilisées. Relier sa borne GND au 0 V.</td><td>≈ 115 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">U4</td><td>Convertisseur isolé 24 → 24 V</td><td>Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865)</td><td>1</td><td>Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A).</td><td>≈ 140–190 € (est.)</td><td><a href="https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">U2</td><td>Convertisseur isolé 24 → 12 V</td><td>Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873)</td><td>1</td><td>Pour les équipements en 12 V. Facultatif.</td><td>≈ 70 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">S1, S2</td><td>Coupe-batteries</td><td>Victron 275 A, VBS127010010</td><td>2</td><td>Placés après le point de charge : les batteries se rechargent même interrupteurs ouverts.</td><td>47,99 € pièce</td><td><a href="https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html" target="_blank" rel="noopener">rayon Victron</a></td></tr>
+    <tr><td class="r">F0, F1, F2</td><td>Porte-fusibles MIDI</td><td>Victron CIP000050001</td><td>3</td><td>Au plus près des bornes + (F1, F2) et derrière X2 (F0). Fusibles MIDI : 50 A pour F1, 30 A pour F0 et F2.</td><td>16,99 € pièce + fusibles</td><td><a href="https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html" target="_blank" rel="noopener">rayon Victron</a></td></tr>
+    <tr><td class="r">DB-A, DB-B</td><td>Distribution à fusibles</td><td>Barre Victron VBB125040010 (Conrad 2497142) et porte-fusibles pour fusibles plats standard, 32 V</td><td>1 + 7</td><td>La barre sert de répartiteur pour la traction ; chaque départ a son porte-fusible plat. DB-A : 4 × 15 A. DB-B : 20 A (U4), 5 A (U2), 10 A (réserve).</td><td>≈ 60 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-bus-bar-vbb125040010-plaque-de-montage-2497142.html" target="_blank" rel="noopener">barre</a> · <a href="https://www.conrad.fr/fr/f/porte-fusible-plat-1838146.html" target="_blank" rel="noopener">porte-fusibles</a></td></tr>
+    <tr><td class="r">X1, X2</td><td>Connecteur de charge</td><td>Connecteur de batterie à courant fort 50 A (Conrad 1229364)</td><td>2</td><td>X1 au bout du câble du chargeur, X2 fixé sur la paroi.</td><td>≈ 10 € pièce (est.)</td><td><a href="https://www.conrad.fr/fr/p/connecteur-de-batterie-a-courant-fort-50-a-1229364-1-pc-s-1229364.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">ES</td><td>Arrêt d'urgence</td><td>Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553)</td><td>1</td><td>Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson).</td><td>≈ 40 € (est.)</td><td><a href="https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">K3</td><td>Relais de détection de charge</td><td>Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788)</td><td>1</td><td>Utiliser le contact NF de l'inverseur.</td><td>17,49 € HT</td><td><a href="https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (deux bus avec l'option B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
+
+    <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries, deux options au choix</span></td></tr>
+    <tr><td class="r">Option A</td><td>Batterie LiFePO4 25,6 V 50 Ah (Wattuneed)</td><td>PowerTech Systems PowerBrick+ PB+24/50 (marque française)</td><td>2</td><td>BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg.</td><td>685 € TTC pièce</td><td><a href="https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">Option B</td><td>Batterie LiFePO4 25,6 V 50 Ah (Manly)</td><td>Manly MLP2450A avec CAN (protocole BMS JBD)</td><td>2</td><td><b>Avantage : le niveau de charge se lit sur le bus CAN</b>, donc par le Jetson. BMS 50 A en continu, 60 A en pointe (&lt; 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport.</td><td>298 USD pièce<br>994 USD les 2, port DDP compris</td><td><a href="https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html" target="_blank" rel="noopener">lien</a> · <a href="https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html" target="_blank" rel="noopener">gamme robots</a></td></tr>
+
+    <tr><td colspan="7"><span class="tag">Fournisseur 3 : RS Components France</span></td></tr>
+    <tr><td class="r">K1</td><td>Contacteur de puissance</td><td>Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538)</td><td>1</td><td>Seul article introuvable chez Conrad. Délai de livraison à vérifier.</td><td>161,08 € HT</td><td><a href="https://fr.rs-online.com/web/p/contacteurs/1058538" target="_blank" rel="noopener">lien</a></td></tr>
+  </tbody>
+</table>
+</div>
+
+<h2>Budget par fournisseur</h2>
+<p class="sub">Prix relevés en novembre 2026, livraison non comprise. « est. » : prix non affiché dans les recherches, estimé d'après les prix habituels de ces articles.</p>
+<div class="grid">
+<div class="card"><h3>Fournisseur 1 : Conrad.fr</h3>
+<table>
+<tr><td>Chargeur Blue Smart IP22 24/16 (1)</td><td>≈ 235 € TTC</td></tr>
+<tr><td>Répartiteur Argo FET 100-3</td><td>≈ 115 € (est.)</td></tr>
+<tr><td>Convertisseur Orion-Tr 24/24-12A isolé</td><td>≈ 140–190 € (est.)</td></tr>
+<tr><td>Convertisseur Orion-Tr 24/12-10</td><td>≈ 70 € (est.)</td></tr>
+<tr><td>2 coupe-batteries Victron 275 A</td><td>96 €</td></tr>
+<tr><td>3 porte-fusibles MIDI et fusibles</td><td>≈ 61 €</td></tr>
+<tr><td>Barre Victron, porte-fusibles plats et fusibles</td><td>≈ 60 € (est.)</td></tr>
+<tr><td>2 connecteurs 50 A</td><td>≈ 20 € (est.)</td></tr>
+<tr><td>Arrêt d'urgence et relais Finder</td><td>≈ 60 €</td></tr>
+<tr><td>Câbles, câble CAN, cosses</td><td>≈ 100–145 € (est.)</td></tr>
+<tr><th>Total Conrad</th><th>≈ 960–1 050 € TTC</th></tr>
+</table></div>
+<div class="card"><h3>Fournisseur 2 : batteries (au choix)</h3>
+<table>
+<tr><td>Option A : 2 × PowerBrick+ 24 V 50 Ah (Wattuneed)</td><td>1 370 € TTC</td></tr>
+<tr><td>Option B : 2 × Manly MLP2450A avec CAN, devis DDP (596 USD + 398 USD de port)</td><td>994 USD, soit ≈ 850–920 €</td></tr>
+</table>
+<h3 style="margin-top:14px">Fournisseur 3 : RS France</h3>
+<table>
+<tr><td>Contacteur Durakool DEVR10 24 V 100 A</td><td>161 € HT</td></tr>
+<tr><th>Total RS</th><th>≈ 195 € TTC</th></tr>
+</table></div>
+<div class="card warn"><h3>Total général</h3>
+<p><b>≈ 2 525 – 2 615 € TTC avec l'option A.</b><br><b>≈ 2 005 – 2 165 € avec l'option B</b>, si le prix DDP de Manly inclut bien la TVA et les droits d'import (à confirmer). Hors livraison Conrad et RS, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II).</p>
+<ul style="margin-top:8px"><li>Les batteries font entre 40 et 55 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
+</div>
+
+<h2>Devis Manly (option B) : conformité</h2>
+<p class="sub">Comparaison du devis, de la fiche technique MLP2450A et du protocole CAN (BMS JBD) avec les besoins de la plateforme.</p>
+<div class="scroll">
+<table>
+  <thead><tr><th>Point</th><th>Besoin de la plateforme</th><th>Manly MLP2450A</th><th>Verdict</th></tr></thead>
+  <tbody>
+    <tr><td class="r">Tension, capacité</td><td>24 V LiFePO4, 50 Ah</td><td>25,6 V (8 cellules), 50 Ah, 1,28 kWh</td><td>Conforme</td></tr>
+    <tr><td class="r">Courant continu</td><td>≥ 50 A (calibre de F1)</td><td>50 A</td><td>Conforme, sans marge : F1 et le BMS ont le même calibre</td></tr>
+    <tr><td class="r">Pointe</td><td>Démarrages des 4 roues</td><td>60 A pendant moins d'1 s</td><td>Conforme pour la traction. Courant d'appel des variateurs à la fermeture de K1 : à vérifier</td></tr>
+    <tr><td class="r">Charge</td><td>Chargeur 28,4 V, 16 A partagés entre les 2 batteries</td><td>29,0 ± 0,2 V, 10 A conseillés, 50 A max</td><td>Conforme : environ 8 A par batterie. À 28,4 V la charge est un peu incomplète mais ménage les cellules ; 28,8 V possible</td></tr>
+    <tr><td class="r">Température</td><td>Pas de charge sous 0 °C</td><td>Charge 0 à 45 °C, protection basse température dans le BMS</td><td>Conforme</td></tr>
+    <tr><td class="r">Niveau de charge</td><td>Lisible par le Jetson</td><td>CAN : état de charge en %, tension, courant, capacité restante, cycles, températures, tension de chaque cellule, défauts</td><td>Conforme, avec les réserves d'intégration ci-dessous</td></tr>
+    <tr><td class="r">Encombrement, masse</td><td>Logement à prévoir</td><td>330 × 172 × 237 mm, 10,3 kg</td><td>Plus léger que la PowerBrick+ (11,8 kg) mais plus long de 70 mm : vérifier l'implantation</td></tr>
+    <tr><td class="r">Robustesse</td><td>Usage en intérieur, robot</td><td>IP67, 6 000 cycles à 80 %, garantie 5 ans</td><td>Conforme, meilleur que l'option A</td></tr>
+    <tr><td class="r">Raccordement</td><td>Cosses 10 mm² et 6 mm²</td><td>2 bornes M6</td><td>Conforme : cosses à œillet M6</td></tr>
+    <tr><td class="r">Coupure basse</td><td>Connue, pour régler l'arrêt du Jetson</td><td>Non indiquée</td><td>À demander</td></tr>
+    <tr><td class="r">Port CAN</td><td>Isolé, connecteur connu</td><td>Isolation, débit et ID « à confirmer séparément » d'après la fiche</td><td>À demander</td></tr>
+    <tr><td class="r">Transport aérien</td><td>Documents obligatoires</td><td>Non fournis</td><td>Demander UN38.3 et fiche de données de sécurité (FDS/MSDS)</td></tr>
+  </tbody>
+</table>
+</div>
+
+<div class="grid" style="margin-top:12px">
+  <div class="card warn"><h3>Intégration CAN : ce qui change</h3><ul>
+    <li>Le BMS parle à 250 kbit/s avec des ID fixes de 0x100 à 0x112. Le Jetson doit envoyer une trame « remote » (RTR) par ID, et la batterie répond. Chaque réponse contient 6 octets et un CRC-16 Modbus.</li>
+    <li>Le débit des roues n'est sans doute pas le même, et l'ID 0x100 est réservé en CANopen (TIME). <b>Les BMS ne vont donc pas sur le bus des roues</b> : ils ont leur propre bus, sur la voie 2 du CANalyst-II.</li>
+    <li><b>Les deux batteries répondent aux mêmes ID.</b> Sur un même bus, leurs réponses entrent en collision. Il faut que Manly programme des ID différents sur la seconde batterie ; sinon, il faut une voie CAN par batterie (seconde interface USB-CAN).</li>
+  </ul></div>
+  <div class="card warn"><h3>Questions à poser à Manly</h3><ul>
+    <li>ID CAN différents pour les deux batteries (par exemple décalés de 0x20) : possible en usine ?</li>
+    <li>Port CAN : isolation galvanique, connecteur et brochage, résistance de 120 Ω intégrée ou non.</li>
+    <li>Seuils de coupure basse tension et de reprise ; tenue au courant d'appel à la mise sous tension.</li>
+    <li>Certificat UN38.3 et FDS pour le transport aérien.</li>
+    <li>Le prix DDP comprend-il la TVA et les droits français ? Facture au nom de l'université, paiement sur bon de commande possible ?</li>
+    <li>Câble CAN fourni ? Consommation du BMS en veille ?</li>
+  </ul></div>
+  <div class="card"><h3>Bilan</h3><p>Les caractéristiques électriques répondent au besoin et le prix est inférieur à l'option A. Il reste un point bloquant à régler avec Manly avant de commander : les ID CAN identiques des deux batteries. Pour l'université, vérifier aussi que le service achats peut payer un fournisseur hors Union européenne.</p></div>
+</div>
+
+<h2>Recharge : mode d'emploi</h2>
+<ol>
+  <li>Arrêter la plateforme. Il est inutile d'ouvrir S1 ou S2 : la charge arrive en amont des coupe-batteries.</li>
+  <li>Brancher la fiche X1 du chargeur sur le socle X2. Le relais K3 coupe aussitôt la traction (K1 s'ouvre), et le Jetson peut rester allumé.</li>
+  <li>Le chargeur recharge les deux batteries en même temps à travers D1. Après 4 h de roulage, il faut environ 2,5 à 3 h. Le voyant du chargeur, ou l'application VictronConnect, indique la fin de charge.</li>
+  <li>Débrancher X1 : K3 retombe et la traction redevient possible.</li>
+</ol>
+
+<h2>Points à vérifier</h2>
+<div class="grid">
+  <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la PowerBrick+ et pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>Option A (PowerBrick+) : pas d'état de charge sur le bus CAN. Option B (Manly) : état de charge sur le bus CAN confirmé par le protocole, mais ID identiques sur les deux batteries.</li></ul></div>
+  <div class="card warn"><h3>Roues CTM300-7</h3><ul><li>Seuil de coupure basse des variateurs : la batterie descend vers 20 V en fin de décharge.</li><li>Capacité d'entrée des variateurs : si l'appel de courant est fort, il faut ajouter une précharge en parallèle sur K1 (à valider avec RoboCT).</li><li>Courant maximal par roue pour confirmer les fusibles de 15 A.</li></ul></div>
+  <div class="card warn"><h3>Jetson</h3><ul><li>Brochage et connecteur de l'entrée Micro-Fit 9–28 V du kit de développement (guide NVIDIA), et réglage de U4 à 24 V.</li><li>Fonctionnement du CANalyst-II sous Linux ARM avec <code>python-can[canalystii]</code> : latence à mesurer avec les roues.</li></ul></div>
+</div>
+
+<p class="sub" style="margin-top:24px">Les références des composants sont des exemples à confirmer auprès des fournisseurs avant la commande. Les prix ont été relevés en novembre 2026 ; ils changent vite et n'incluent pas toujours la livraison.</p>
+</main>
+</body>
+</html>
