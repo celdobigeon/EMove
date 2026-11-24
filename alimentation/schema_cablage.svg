@@ -104,17 +104,32 @@
   <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 411 V440"/>
   <rect fill="#fff" stroke="#333" stroke-width="1.4" x="328" y="440" width="34" height="22"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="345" y="455" text-anchor="middle">K3</text>
-  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 462 V490"/>
-  <rect fill="#fff" stroke="#333" stroke-width="1.4" x="331" y="490" width="28" height="24"/>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="345" y="506" text-anchor="middle">K1</text>
-  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 514 V528"/><use href="#gnd" xmlns:xlink="http://www.w3.org/1999/xlink" x="345" y="528"/>
+  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 462 V476"/>
+  <rect fill="#fff" stroke="#333" stroke-width="1.4" x="331" y="476" width="28" height="18"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="345" y="489" text-anchor="middle">K2</text>
+  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 494 V510"/>
+  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 470 H300 V476 M300 494 V502 H345 M300 502 H240 V510"/>
+  <circle cx="345" cy="470" r="2.5" fill="#333"/><circle cx="345" cy="502" r="2.5" fill="#333"/><circle cx="300" cy="502" r="2.5" fill="#333"/>
+  <rect fill="#fff" stroke="#333" stroke-width="1.4" x="286" y="476" width="28" height="18"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="300" y="489" text-anchor="middle">RA</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="282" y="482" text-anchor="end">RA : bouton</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="282" y="494" text-anchor="end">réarmement</text>
+  <rect fill="#fff" stroke="#333" stroke-width="1.4" x="331" y="510" width="28" height="24"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="345" y="526" text-anchor="middle">K1</text>
+  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M345 534 V546"/><use href="#gnd" xmlns:xlink="http://www.w3.org/1999/xlink" x="345" y="546"/>
+  <rect fill="#fff" stroke="#333" stroke-width="1.4" x="226" y="510" width="28" height="24"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="240" y="526" text-anchor="middle">K2</text>
+  <path stroke="#1f6fd1" stroke-width="1.6" fill="none" d="M240 534 V546"/><use href="#gnd" xmlns:xlink="http://www.w3.org/1999/xlink" x="240" y="546"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="258" y="548">K2 maintien</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="398">ES : arrêt d'urgence</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="411">coup de poing (NF)</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="455">K3 contact NF</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="500">K1 bobine 24 V</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="513">(traction ON si ES</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="526">relâché et chargeur</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="539">débranché)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="489">K2 contact NO</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="520">K1 bobine 24 V</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="533">(traction ON après</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="546">appui sur RA, si ES</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="559">relâché et chargeur</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="368" y="572">débranché)</text>
 
   <!-- DB-A -->
   <rect x="466" y="300" width="9" height="290" fill="#d0312d"/>
@@ -139,7 +154,7 @@
     <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="510" y="558" text-anchor="middle">F14 15 A</text><path stroke="#d0312d" stroke-width="2.6" fill="none" d="M530 570 H560"/>
     <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="560" y="548" width="92" height="44"/><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="606" y="567" text-anchor="middle">M4 CTM300-7</text><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="606" y="583" text-anchor="middle">AR droite</text>
   </g>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="594" y="618" text-anchor="middle">câbles 2,5 mm² · retours − → barre 0 V</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="594" y="632" text-anchor="middle">câbles 2,5 mm² · retours − → barre 0 V</text>
 
   <!-- ============ CIRCUIT B ============ -->
   <rect fill="none" stroke="#b9bec6" stroke-width="1" stroke-dasharray="3 4" x="685" y="250" width="605" height="380"/>
