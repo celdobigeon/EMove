@@ -194,6 +194,16 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="519" text-anchor="middle">U8e → commande du son</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="532" text-anchor="middle">2 A max par module · 0,75 mm²</text>
 
+  <!-- Réseau : switch Ethernet des Raspberry Pi -->
+  <path stroke="#d0312d" stroke-width="2.6" fill="none" d="M1026 374 H1012"/><rect fill="#fff" stroke="#333" stroke-width="1.2" x="990" y="368" width="22" height="12"/><line x1="990" y1="374" x2="1012" y2="374" stroke="#333" stroke-width="1"/><path stroke="#d0312d" stroke-width="2.6" fill="none" d="M990 374 H982"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1001" y="362" text-anchor="middle">F24</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1001" y="394" text-anchor="middle">2 A</text>
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="845" y="345" width="137" height="58"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="913" y="361" text-anchor="middle">SW1 switch Ethernet</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="913" y="374" text-anchor="middle">8 ports Gigabit, 12–48 V</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="913" y="386" text-anchor="middle">WIWAV WDH-8GT-DC</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="913" y="398" text-anchor="middle">RJ45 : 4 × Pi 3 et U1</text>
+
   <!-- Audio : micro et enceintes, alimentés par l'USB du Jetson -->
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="845" y="418" width="150" height="46"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="920" y="434" text-anchor="middle">U5 micro 4 voies</text>
