@@ -6,7 +6,7 @@ Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A (PowerBrick+ en secours si 
 - **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ses périphériques, la Raspberry Pi et la commande du son.
 - **Recharge** : le chargeur se branche sur le socle X2. Le répartiteur D1 recharge les deux batteries en même temps. Tant que le chargeur est branché, le relais K3 bloque la traction.
 - **Audio** : un micro à 4 voies (reSpeaker XVF3800) et des enceintes USB (Creative Pebble V3), branchés sur le Jetson, pour dialoguer avec la sculpture. Le son passe par la sortie jack du micro pour que l'annulation d'écho fonctionne.
-- **Commande** : une Raspberry Pi (déjà possédée) commande la sculpture. Elle est alimentée en 5,1 V par un abaisseur LM2596 (U8a) branché sur le circuit B ; un second abaisseur (U8b) alimente la commande du son.
+- **Commande** : une Raspberry Pi 4 (déjà possédée) commande la sculpture. Elle est alimentée en 5,1 V par un abaisseur LM2596 (U8a) branché sur le circuit B ; un second abaisseur (U8b) alimente la commande du son.
 - **CAN** : la voie 1 du CANalyst-II U3 pilote les roues. Les deux batteries Manly répondent aux mêmes ID CAN : chacune a donc son bus, à 250 kbit/s. BAT-A est lue par la voie 2 de U3, BAT-B par un second CANalyst-II (U7).
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
@@ -22,6 +22,8 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 
 ![Schéma de câblage](schema_cablage.svg)
 
+## Nomenclature
+
 **Déjà possédé**
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
@@ -29,7 +31,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | M1–M4 | Roues motorisées | RoboCT CTM300-7 (24 V) | 4 | Déjà en place sur la plateforme. | — | [RoboCT](https://www.roboct-global.com/mobile-robot-components/mecanum-wheel/mecanum-omni-wheel.html) |
 | U1 | Calculateur | NVIDIA Jetson AGX Thor, kit de développement (T5000) | 1 | Alimenté par son entrée Micro-Fit 9–28 V continu (8 A max), à travers U4. Vérifier le brochage du connecteur Micro-Fit dans le guide NVIDIA. | — | [Amazon](https://www.amazon.fr/dp/B0FTM2LXSF) |
 | U3 | Interface USB-CAN | CANalyst-II (ZLGCANpro) | 1 | Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : BMS de BAT-A, à 250 kbit/s. Sous Linux, pilote non officiel `python-can[canalystii]` (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson. | — | [Amazon](https://www.amazon.fr/dp/B07WC1XX1S) |
-| U9 | Carte de commande | Raspberry Pi (modèle à préciser) | 1 | Alimentée en 5,1 V par l'abaisseur U8a, depuis le circuit B. Le courant à fournir dépend du modèle : voir « Points à vérifier ». | — | — |
+| U9 | Carte de commande | Raspberry Pi 4 Model B | 1 | Alimentée en 5,1 V par l'abaisseur U8a, depuis le circuit B, par son entrée USB-C. Raspberry Pi conseille une alimentation de 5,1 V et 3 A. Sans périphérique USB, la carte consomme environ 0,6 à 1,3 A ; ses ports USB peuvent tirer jusqu'à 1,2 A de plus. U8a (2 A max) convient donc si aucun périphérique USB gourmand n'y est branché : voir « Points à vérifier ». | — | — |
 
 **Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)**
 
