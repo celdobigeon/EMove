@@ -189,6 +189,18 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1068" y="488" text-anchor="middle">F23 10 A</text><path stroke="#d0312d" stroke-width="2.6" fill="none" d="M1088 500 H1108"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1114" y="504">réserve (24 V périphériques)</text>
 
+  <!-- Audio : micro et enceintes, alimentés par l'USB du Jetson -->
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="845" y="418" width="150" height="46"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="920" y="434" text-anchor="middle">U5 micro 4 voies</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="920" y="447" text-anchor="middle">reSpeaker XVF3800</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="920" y="459" text-anchor="middle">USB → U1 (son et alim.)</text>
+  <path stroke="#8e44ad" stroke-width="1.8" fill="none" d="M920 464 V488"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="926" y="480">jack 3,5 mm</text>
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="845" y="488" width="150" height="46"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="920" y="504" text-anchor="middle">U6 enceintes 2.0</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="920" y="517" text-anchor="middle">Creative Pebble V3</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="920" y="529" text-anchor="middle">USB → U1 (alim. 5 V)</text>
+
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="545" width="170" height="52"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="562" text-anchor="middle">U3 interface USB-CAN</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II (déjà possédée)</text>
@@ -228,5 +240,6 @@
     <path stroke="#8a8f98" stroke-width="1.6" fill="none" stroke-dasharray="4 4" d="M520 0 H550"/><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="558" y="4">USB</text>
     <use href="#gnd" xmlns:xlink="http://www.w3.org/1999/xlink" x="620" y="-6"/><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="634" y="4">vers la barre 0 V</text>
     <rect fill="#fff" stroke="#333" stroke-width="1.2" x="760" y="-7" width="30" height="14"/><line x1="760" y1="0" x2="790" y2="0" stroke="#333" stroke-width="1"/><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="798" y="4">fusible</text>
+    <path stroke="#8e44ad" stroke-width="1.8" fill="none" d="M870 0 H900"/><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="908" y="4">audio analogique</text>
   </g>
 </svg>

@@ -40,6 +40,7 @@
   .cmd { stroke: var(--cmd); stroke-width: 1.6; fill: none; }
   .can { stroke: var(--can); stroke-width: 2; fill: none; stroke-dasharray: 8 5; }
   .usb { stroke: var(--usb); stroke-width: 1.6; fill: none; stroke-dasharray: 4 4; }
+  .aud { stroke: #8e44ad; stroke-width: 1.8; fill: none; }
   .panel { stroke: #888; stroke-width: 1.5; stroke-dasharray: 6 4; }
   .zone { fill: none; stroke: #b9bec6; stroke-width: 1; stroke-dasharray: 3 4; }
   text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1d1d1f; }
@@ -54,7 +55,7 @@
     h1 { font-size: 20px; }
     h2 { font-size: 15px; margin-top: 18px; break-after: avoid; }
     .scroll { overflow: visible; border: none; }
-    svg.sch { min-width: 0; width: auto; height: 132mm; margin: 0 auto; break-inside: avoid; }
+    svg.sch { min-width: 0; width: auto; height: 116mm; margin: 0 auto; break-inside: avoid; }
     .grid { gap: 8px; }
     .card { padding: 8px 10px; }
     table { font-size: 10px; }
@@ -67,7 +68,7 @@
 <body>
 <main>
 <h1>Alimentation et câblage de la plateforme</h1>
-<p class="sub">4 roues mecanum RoboCT CTM300-7 (24 V) et kit NVIDIA Jetson AGX Thor. Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise de recharge.</p>
+<p class="sub">4 roues mecanum RoboCT CTM300-7 (24 V) et kit NVIDIA Jetson AGX Thor, avec micro et enceintes pour dialoguer avec la sculpture. Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise de recharge.</p>
 
 <div class="grid">
   <div class="card"><h3>Circuit A : traction</h3><p>BAT-A alimente les 4 roues. L'arrêt d'urgence coupe ce circuit, et ce circuit seulement.</p></div>
@@ -265,6 +266,18 @@
   <text x="1068" y="488" class="ts" text-anchor="middle">F23 10 A</text><path d="M1088 500 H1108" class="pos"/>
   <text x="1114" y="504" class="ts">réserve (24 V périphériques)</text>
 
+  <!-- Audio : micro et enceintes, alimentés par l'USB du Jetson -->
+  <rect x="845" y="418" width="150" height="46" class="load"/>
+  <text x="920" y="434" class="t b" text-anchor="middle">U5 micro 4 voies</text>
+  <text x="920" y="447" class="ts" text-anchor="middle">reSpeaker XVF3800</text>
+  <text x="920" y="459" class="ts" text-anchor="middle">USB → U1 (son et alim.)</text>
+  <path d="M920 464 V488" class="aud"/>
+  <text x="926" y="480" class="ts">jack 3,5 mm</text>
+  <rect x="845" y="488" width="150" height="46" class="load"/>
+  <text x="920" y="504" class="t b" text-anchor="middle">U6 enceintes 2.0</text>
+  <text x="920" y="517" class="ts" text-anchor="middle">Creative Pebble V3</text>
+  <text x="920" y="529" class="ts" text-anchor="middle">USB → U1 (alim. 5 V)</text>
+
   <rect x="1108" y="545" width="170" height="52" class="load"/>
   <text x="1193" y="562" class="t b" text-anchor="middle">U3 interface USB-CAN</text>
   <text x="1193" y="576" class="ts" text-anchor="middle">CANalyst-II (déjà possédée)</text>
@@ -304,6 +317,7 @@
     <path d="M520 0 H550" class="usb"/><text x="558" y="4" class="ts">USB</text>
     <use href="#gnd" x="620" y="-6"/><text x="634" y="4" class="ts">vers la barre 0 V</text>
     <rect x="760" y="-7" width="30" height="14" class="fuse"/><line x1="760" y1="0" x2="790" y2="0" stroke="#333" stroke-width="1"/><text x="798" y="4" class="ts">fusible</text>
+    <path d="M870 0 H900" class="aud"/><text x="908" y="4" class="ts">audio analogique</text>
   </g>
 </svg>
 </div>
@@ -330,6 +344,11 @@
     <tr><td class="r">ES</td><td>Arrêt d'urgence</td><td>Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553)</td><td>1</td><td>Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson).</td><td>≈ 40 € (est.)</td><td><a href="https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">K3</td><td>Relais de détection de charge</td><td>Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788)</td><td>1</td><td>Utiliser le contact NF de l'inverseur.</td><td>17,49 € HT</td><td><a href="https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (deux bus avec l'option B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
+
+    <tr><td colspan="7"><span class="tag">Fournisseur 4 : Amazon.fr (audio, pour dialoguer avec la sculpture)</span></td></tr>
+    <tr><td class="r">U5</td><td>Micro à 4 voies</td><td>Seeed Studio reSpeaker XVF3800, réseau de 4 micros USB, carte nue</td><td>1</td><td>4 micros MEMS sur 360°, captation jusqu'à 5 m. Traitement intégré : annulation d'écho, formation de faisceau, direction de la voix, détection de parole, réduction de bruit. Vu comme un micro USB standard, sans pilote, compatible Jetson. Branché sur un port USB du Jetson, qui l'alimente. Carte nue : prévoir un boîtier ou une fixation.</td><td>134,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B0FKGFXQQ5" target="_blank" rel="noopener">Amazon</a></td></tr>
+    <tr><td class="r">U6</td><td>Enceintes 2.0</td><td>Creative Pebble V3, USB-C, Bluetooth 5.0</td><td>1</td><td>8 W RMS (16 W crête), alimentées en 5 V par l'USB du Jetson. Entrée audio : de préférence le jack 3,5 mm relié à la sortie son de U5, pour que l'annulation d'écho du micro reçoive ce que dit la sculpture (voir « Points à vérifier »). Câble jack 3,5 mm mâle-mâle à prévoir s'il n'est pas dans la boîte.</td><td>29,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B08F5BQZL8" target="_blank" rel="noopener">Amazon</a></td></tr>
+    <tr><td class="r">—</td><td>Câbles USB</td><td>Anker 331, USB-A vers USB-C, 1,8 m, lot de 2</td><td>1 lot</td><td>Un câble pour U5, un pour U6. Le lien a été donné deux fois : un lot de 2 câbles suffit.</td><td>8,11 € TTC</td><td><a href="https://www.amazon.fr/dp/B07DC5PPFV" target="_blank" rel="noopener">Amazon</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries, deux options au choix</span></td></tr>
     <tr><td class="r">Option A</td><td>Batterie LiFePO4 25,6 V 50 Ah (Wattuneed)</td><td>PowerTech Systems PowerBrick+ PB+24/50 (marque française)</td><td>2</td><td>BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg.</td><td>685 € TTC pièce</td><td><a href="https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html" target="_blank" rel="noopener">lien</a></td></tr>
@@ -367,10 +386,17 @@
 <table>
 <tr><td>Contacteur Durakool DEVR10 24 V 100 A</td><td>161 € HT</td></tr>
 <tr><th>Total RS</th><th>≈ 195 € TTC</th></tr>
+</table>
+<h3 style="margin-top:14px">Fournisseur 4 : Amazon.fr (audio)</h3>
+<table>
+<tr><td>Micro reSpeaker XVF3800</td><td>134,99 €</td></tr>
+<tr><td>Enceintes Creative Pebble V3</td><td>29,99 €</td></tr>
+<tr><td>Câbles USB Anker, lot de 2</td><td>8,11 €</td></tr>
+<tr><th>Total Amazon</th><th>≈ 173 € TTC</th></tr>
 </table></div>
 <div class="card warn"><h3>Total général</h3>
-<p><b>≈ 2 525 – 2 615 € TTC avec l'option A.</b><br><b>≈ 2 005 – 2 165 € avec l'option B</b>, si le prix DDP de Manly inclut bien la TVA et les droits d'import (à confirmer). Hors livraison Conrad et RS, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II).</p>
-<ul style="margin-top:8px"><li>Les batteries font entre 40 et 55 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
+<p><b>≈ 2 700 – 2 790 € TTC avec l'option A.</b><br><b>≈ 2 180 – 2 340 € avec l'option B</b>, si le prix DDP de Manly inclut bien la TVA et les droits d'import (à confirmer). Audio compris (≈ 173 €). Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II).</p>
+<ul style="margin-top:8px"><li>Les batteries font environ 40 à 50 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
 </div>
 
 <h2>Devis Manly (option B) : conformité</h2>
@@ -425,6 +451,7 @@
   <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la PowerBrick+ et pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>Option A (PowerBrick+) : pas d'état de charge sur le bus CAN. Option B (Manly) : état de charge sur le bus CAN confirmé par le protocole, mais ID identiques sur les deux batteries.</li></ul></div>
   <div class="card warn"><h3>Roues CTM300-7</h3><ul><li>Seuil de coupure basse des variateurs : la batterie descend vers 20 V en fin de décharge.</li><li>Capacité d'entrée des variateurs : si l'appel de courant est fort, il faut ajouter une précharge en parallèle sur K1 (à valider avec RoboCT).</li><li>Courant maximal par roue pour confirmer les fusibles de 15 A.</li></ul></div>
   <div class="card warn"><h3>Jetson</h3><ul><li>Brochage et connecteur de l'entrée Micro-Fit 9–28 V du kit de développement (guide NVIDIA), et réglage de U4 à 24 V.</li><li>Fonctionnement du CANalyst-II sous Linux ARM avec <code>python-can[canalystii]</code> : latence à mesurer avec les roues.</li></ul></div>
+  <div class="card warn"><h3>Audio</h3><ul><li>Annulation d'écho : le micro U5 doit recevoir ce que la sculpture dit. Envoyer le son vers la sortie de U5 (carte son USB du reSpeaker) puis, par le jack 3,5 mm, vers les enceintes U6. Si le son part directement vers les enceintes en USB, la sculpture s'entendra parler. Vérifier dans la documentation Seeed que la sortie jack sert bien de référence d'écho.</li><li>Consommation ajoutée au Jetson : environ 10 W par l'USB (enceintes au volume maximal). BAT-B garde plus de 4 h d'autonomie (≈ 1 000 Wh utiles pour ≈ 170 W).</li><li>Placer le micro en hauteur, loin des enceintes et des roues.</li></ul></div>
 </div>
 
 <p class="sub" style="margin-top:24px">Les références des composants sont des exemples à confirmer auprès des fournisseurs avant la commande. Les prix ont été relevés en novembre 2026 ; ils changent vite et n'incluent pas toujours la livraison.</p>

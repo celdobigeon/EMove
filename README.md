@@ -1,6 +1,6 @@
 # EMove
 
-Plateforme mobile à 4 roues mecanum RoboCT CTM300-7 (24 V), pilotée par un kit NVIDIA Jetson AGX Thor.
+Plateforme mobile à 4 roues mecanum RoboCT CTM300-7 (24 V), pilotée par un kit NVIDIA Jetson AGX Thor, avec micro et enceintes pour dialoguer avec la sculpture.
 
 ## Contenu
 

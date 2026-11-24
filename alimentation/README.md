@@ -5,6 +5,7 @@ Deux batteries LiFePO4 25,6 V / 50 Ah, deux circuits séparés, une seule prise 
 - **Circuit A, traction** : BAT-A alimente les 4 roues. L'arrêt d'urgence mécanique (contacteur K1) coupe ce circuit, et ce circuit seulement.
 - **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ainsi que ses périphériques.
 - **Recharge** : le chargeur se branche sur le socle X2. Le répartiteur D1 recharge les deux batteries en même temps. Tant que le chargeur est branché, le relais K3 bloque la traction.
+- **Audio** : un micro à 4 voies (reSpeaker XVF3800) et des enceintes USB (Creative Pebble V3), branchés sur le Jetson, pour dialoguer avec la sculpture. Le son passe par la sortie jack du micro pour que l'annulation d'écho fonctionne.
 - **CAN** : la voie 1 du CANalyst-II pilote les roues. La voie 2 lit les BMS des batteries Manly (option B, 250 kbit/s).
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
@@ -43,6 +44,14 @@ Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis
 | ES | Arrêt d'urgence | Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553) | 1 | Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson). | ≈ 40 € (est.) | [lien](https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553) |
 | K3 | Relais de détection de charge | Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788) | 1 | Utiliser le contact NF de l'inverseur. | 17,49 € HT | [lien](https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html) |
 | — | Câblage | Câble souple rouge et noir, câble CAN blindé, cosses | — | 10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (deux bus avec l'option B). | ≈ 100–145 € (est.) | [Conrad](https://www.conrad.fr/) |
+
+**Fournisseur 4 : Amazon.fr (audio, pour dialoguer avec la sculpture)**
+
+| Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
+|---|---|---|---|---|---|---|
+| U5 | Micro à 4 voies | Seeed Studio reSpeaker XVF3800, réseau de 4 micros USB, carte nue | 1 | 4 micros MEMS sur 360°, captation jusqu'à 5 m. Traitement intégré : annulation d'écho, formation de faisceau, direction de la voix, détection de parole, réduction de bruit. Vu comme un micro USB standard, sans pilote, compatible Jetson. Branché sur un port USB du Jetson, qui l'alimente. Carte nue : prévoir un boîtier ou une fixation. | 134,99 € TTC | [Amazon](https://www.amazon.fr/dp/B0FKGFXQQ5) |
+| U6 | Enceintes 2.0 | Creative Pebble V3, USB-C, Bluetooth 5.0 | 1 | 8 W RMS (16 W crête), alimentées en 5 V par l'USB du Jetson. Entrée audio : de préférence le jack 3,5 mm relié à la sortie son de U5, pour que l'annulation d'écho du micro reçoive ce que dit la sculpture (voir « Points à vérifier »). Câble jack 3,5 mm mâle-mâle à prévoir s'il n'est pas dans la boîte. | 29,99 € TTC | [Amazon](https://www.amazon.fr/dp/B08F5BQZL8) |
+| — | Câbles USB | Anker 331, USB-A vers USB-C, 1,8 m, lot de 2 | 1 lot | Un câble pour U5, un pour U6. Le lien a été donné deux fois : un lot de 2 câbles suffit. | 8,11 € TTC | [Amazon](https://www.amazon.fr/dp/B07DC5PPFV) |
 
 **Fournisseur 2 : batteries, deux options au choix**
 
