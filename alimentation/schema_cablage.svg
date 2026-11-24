@@ -190,7 +190,7 @@
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="460" width="170" height="78"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="476" text-anchor="middle">U8 abaisseurs LM2596 (×5)</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="491" text-anchor="middle">U8a–d → 5,1 V : 4 × Raspberry Pi 3</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="505" text-anchor="middle">(U9, dont une fait la commande)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="505" text-anchor="middle">(U9, dont une pilote les roues)</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="519" text-anchor="middle">U8e → commande du son</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="532" text-anchor="middle">2 A max par module · 0,75 mm²</text>
 
@@ -224,11 +224,17 @@
 
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="545" width="170" height="52"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="562" text-anchor="middle">U3 interface USB-CAN</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II n° 1 · USB → U1</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II n° 1 · USB → Pi 3</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="590" text-anchor="middle">voie 1 : roues · voie 2 : BAT-A</text>
-  <path stroke="#8a8f98" stroke-width="1.6" fill="none" stroke-dasharray="4 4" d="M1278 331 H1294 V571 H1278"/>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1298" y="455" transform="rotate(90 1298 455)" text-anchor="middle">USB</text>
+  <path stroke="#8a8f98" stroke-width="1.6" fill="none" stroke-dasharray="4 4" d="M1278 524 H1294 V571 H1278"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1298" y="548" transform="rotate(90 1298 548)" text-anchor="middle">USB</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="960" y="618" text-anchor="middle">retours − du circuit B → barre 0 V</text>
+
+  <!-- Arduino et capteurs à ultrasons -->
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="988" y="556" width="112" height="44"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1044" y="570" text-anchor="middle">U11 Arduino</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1044" y="583" text-anchor="middle">+ ultrasons SEN0208</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1044" y="595" text-anchor="middle">USB → Pi 3 (alim. 5 V)</text>
 
   <!-- ============ BUS CAN 1 : roues (voie 1 de U3) ============ -->
   <path stroke="#138a4b" stroke-width="2" fill="none" stroke-dasharray="8 5" d="M652 330 H664 M652 410 H664 M652 490 H664 M652 570 H664 M664 330 V665 H1240 V597"/>
@@ -250,7 +256,7 @@
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="840" y="552" width="140" height="50"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="910" y="568" text-anchor="middle">U7 interface USB-CAN</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="910" y="582" text-anchor="middle">CANalyst-II n° 2 · 250 kbit/s</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="910" y="595" text-anchor="middle">USB → U1 · voie 1 : BAT-B</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="910" y="595" text-anchor="middle">USB → Pi 3 · voie 1 : BAT-B</text>
 
   <!-- ============ BARRE 0 V ============ -->
   <path stroke="#1d1d1f" stroke-width="2.6" fill="none" d="M150 385 H170 V735"/>
