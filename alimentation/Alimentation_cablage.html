@@ -152,7 +152,6 @@
   <text x="95" y="330" class="ts" text-anchor="middle">LiFePO4</text>
   <text x="95" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
   <text x="95" y="360" class="ts" text-anchor="middle">Manly MLP2450A</text>
-  <text x="95" y="375" class="ts" text-anchor="middle">secours PowerBrick+</text>
   <text x="142" y="316" class="ts">+</text><text x="142" y="390" class="ts">−</text>
 
   <path d="M150 320 H170" class="pos"/>
@@ -243,7 +242,6 @@
   <text x="755" y="330" class="ts" text-anchor="middle">LiFePO4</text>
   <text x="755" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
   <text x="755" y="360" class="ts" text-anchor="middle">Manly MLP2450A</text>
-  <text x="755" y="375" class="ts" text-anchor="middle">secours PowerBrick+</text>
   <text x="802" y="316" class="ts">+</text><text x="802" y="390" class="ts">−</text>
 
   <path d="M810 320 H830" class="pos"/>
@@ -385,7 +383,7 @@
     <tr><td class="r">US</td><td>Capteurs à ultrasons étanches</td><td>DFRobot SEN0208 (JSN-SR04T V3.0)</td><td>à préciser</td><td>Détection de personnes et d'objets, avec les caméras. Mesure de 25 cm à 4,5 m, cône de 60°, alimentation 3 à 5 V, 40 mA. Sorties trigger et echo vers l'Arduino U11 ; câble de 2,5 m. Zone aveugle sous 25 cm.</td><td>—</td><td><a href="https://www.gotronic.fr/art-capteur-etanche-a-ultrasons-sen0208-25729.htm" target="_blank" rel="noopener">Gotronic</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage, caméras)</span></td></tr>
-    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly comme aux PowerBrick+. Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly (charge conseillée 29,0 V ; 28,4 V ménage les cellules). Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">D1</td><td>Répartiteur de charge</td><td>Victron Argo FET 100-3, ARG100301020R (Conrad 1846191)</td><td>1</td><td>2 sorties utilisées. Relier sa borne GND au 0 V.</td><td>≈ 115 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U4</td><td>Convertisseur isolé 24 → 24 V</td><td>Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865)</td><td>1</td><td>Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A).</td><td>≈ 140–190 € (est.)</td><td><a href="https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U2</td><td>Convertisseur isolé 24 → 12 V</td><td>Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873)</td><td>1</td><td>Pour les équipements en 12 V. Facultatif.</td><td>≈ 70 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html" target="_blank" rel="noopener">lien</a></td></tr>
@@ -415,10 +413,8 @@
     <tr><td class="r">—</td><td>Câbles d'alimentation des Raspberry Pi</td><td>RUNCCI-YUN, micro-USB mâle vers 2 fils nus, 22 AWG, 30 cm, lot de 6</td><td>1 lot</td><td>Relient chaque abaisseur U8 (5,1 V) à l'entrée micro-USB d'une Raspberry Pi 3. Fils de 22 AWG pour limiter la chute de tension. Deux de rechange.</td><td>7,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B0CWNTZMG2" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">—</td><td>Câble USB de l'Arduino</td><td>UGREEN, USB-A vers USB-B, 1 m</td><td>1</td><td>Relie l'Arduino U11 à la Raspberry Pi 3 de commande (données et 5 V). Pour une Arduino Uno ou Mega ; à changer si le modèle a un autre connecteur (Nano : mini- ou micro-USB).</td><td>5,84 € TTC</td><td><a href="https://www.amazon.fr/dp/B086ZHLW5T" target="_blank" rel="noopener">Amazon</a></td></tr>
 
-    <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries Manly (retenues), PowerBrick+ en secours</span></td></tr>
-    <tr><td class="r">BAT-A, BAT-B</td><td>Batterie LiFePO4 25,6 V 50 Ah (Manly), <b>retenue</b></td><td>Manly MLP2450A avec CAN (protocole BMS JBD)</td><td>2</td><td><b>Le niveau de charge se lit sur le bus CAN</b>, par la Raspberry Pi 3 qui pilote les roues (une interface USB-CAN par batterie : U3 et U7), qui le transmet au Jetson. BMS 50 A en continu, 60 A en pointe (&lt; 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport.</td><td>298 USD pièce<br>994 USD les 2, port DDP compris</td><td><a href="https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html" target="_blank" rel="noopener">lien</a> · <a href="https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html" target="_blank" rel="noopener">gamme robots</a></td></tr>
-    <tr><td class="r">Secours</td><td>Batterie LiFePO4 25,6 V 50 Ah (Wattuneed)</td><td>PowerTech Systems PowerBrick+ PB+24/50 (marque française)</td><td>2</td><td><b>À commander seulement si le délai de Manly est trop long.</b> Disponible en France. BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg. Pas d'état de charge sur le bus CAN : U7 devient inutile.</td><td>685 € TTC pièce</td><td><a href="https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html" target="_blank" rel="noopener">lien</a></td></tr>
-
+    <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries Manly</span></td></tr>
+    <tr><td class="r">BAT-A, BAT-B</td><td>Batterie LiFePO4 25,6 V 50 Ah (Manly)</td><td>Manly MLP2450A avec CAN (protocole BMS JBD)</td><td>2</td><td><b>Le niveau de charge se lit sur le bus CAN</b>, par la Raspberry Pi 3 qui pilote les roues (une interface USB-CAN par batterie : U3 et U7), qui le transmet au Jetson. BMS 50 A en continu, 60 A en pointe (&lt; 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport.</td><td>298 USD pièce<br>994 USD les 2, port DDP compris</td><td><a href="https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html" target="_blank" rel="noopener">lien</a> · <a href="https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html" target="_blank" rel="noopener">gamme robots</a></td></tr>
     <tr><td colspan="7"><span class="tag">Fournisseur 3 : RS Components France</span></td></tr>
     <tr><td class="r">K1</td><td>Contacteur de puissance</td><td>Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538)</td><td>1</td><td>Seul article commandé chez RS : ni Conrad ni Amazon n'ont de contacteur équivalent. Conrad ne propose que des relais à souder sur circuit imprimé ; Amazon, des copies d'Albright SW80 de vendeurs inconnus, à éviter pour la coupure d'arrêt d'urgence. Délai de livraison à vérifier.</td><td>161,08 € HT</td><td><a href="https://fr.rs-online.com/web/p/contacteurs/1058538" target="_blank" rel="noopener">lien</a></td></tr>
   </tbody>
@@ -446,8 +442,7 @@
 </table></div>
 <div class="card"><h3>Fournisseur 2 : batteries</h3>
 <table>
-<tr><td><b>Retenu :</b> 2 × Manly MLP2450A avec CAN, devis DDP (596 USD + 398 USD de port)</td><td>994 USD, soit ≈ 850–920 €</td></tr>
-<tr><td>Secours : 2 × PowerBrick+ 24 V 50 Ah (Wattuneed), si le délai Manly est trop long</td><td>1 370 € TTC</td></tr>
+<tr><td>2 × Manly MLP2450A avec CAN, devis DDP (596 USD + 398 USD de port)</td><td>994 USD, soit ≈ 850–920 €</td></tr>
 </table>
 <h3 style="margin-top:14px">Fournisseur 3 : RS France</h3>
 <table>
@@ -469,11 +464,11 @@
 </table>
 </div>
 <div class="card warn"><h3>Total général</h3>
-<p><b>≈ 2 865 – 3 025 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Avec les batteries de secours PowerBrick+, sans U7 : ≈ 3 290 – 3 380 € TTC. Audio, interfaces CAN, abaisseurs, caméras, réseau et microSD compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, 4 Raspberry Pi 3).</p>
-<ul style="margin-top:8px"><li>Les batteries font environ 40 à 50 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
+<p><b>≈ 2 865 – 3 025 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Audio, interfaces CAN, abaisseurs, caméras, réseau et microSD compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, 4 Raspberry Pi 3).</p>
+<ul style="margin-top:8px"><li>Les batteries font environ 30 % du budget.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
 </div>
 
-<h2>Devis Manly (batteries retenues) : conformité</h2>
+<h2>Devis Manly : conformité</h2>
 <p class="sub">Comparaison du devis, de la fiche technique MLP2450A et du protocole CAN (BMS JBD) avec les besoins de la plateforme.</p>
 <div class="scroll">
 <table>
@@ -485,8 +480,8 @@
     <tr><td class="r">Charge</td><td>Chargeur 28,4 V, 16 A partagés entre les 2 batteries</td><td>29,0 ± 0,2 V, 10 A conseillés, 50 A max</td><td>Conforme : environ 8 A par batterie. À 28,4 V la charge est un peu incomplète mais ménage les cellules ; 28,8 V possible</td></tr>
     <tr><td class="r">Température</td><td>Pas de charge sous 0 °C</td><td>Charge 0 à 45 °C, protection basse température dans le BMS</td><td>Conforme</td></tr>
     <tr><td class="r">Niveau de charge</td><td>Lisible par la Raspberry Pi de commande et le Jetson</td><td>CAN : état de charge en %, tension, courant, capacité restante, cycles, températures, tension de chaque cellule, défauts</td><td>Conforme, avec les réserves d'intégration ci-dessous</td></tr>
-    <tr><td class="r">Encombrement, masse</td><td>Logement à prévoir</td><td>330 × 172 × 237 mm, 10,3 kg</td><td>Plus léger que la PowerBrick+ (11,8 kg) mais plus long de 70 mm : vérifier l'implantation</td></tr>
-    <tr><td class="r">Robustesse</td><td>Usage en intérieur, robot</td><td>IP67, 6 000 cycles à 80 %, garantie 5 ans</td><td>Conforme, meilleur que la PowerBrick+</td></tr>
+    <tr><td class="r">Encombrement, masse</td><td>Logement à prévoir</td><td>330 × 172 × 237 mm, 10,3 kg</td><td>Vérifier l'implantation sur la plateforme</td></tr>
+    <tr><td class="r">Robustesse</td><td>Usage en intérieur, robot</td><td>IP67, 6 000 cycles à 80 %, garantie 5 ans</td><td>Conforme</td></tr>
     <tr><td class="r">Raccordement</td><td>Cosses 10 mm² et 6 mm²</td><td>2 bornes M6</td><td>Conforme : cosses à œillet M6</td></tr>
     <tr><td class="r">Coupure basse</td><td>Connue, pour régler l'arrêt du Jetson</td><td>Non indiquée</td><td>À demander</td></tr>
     <tr><td class="r">Port CAN</td><td>Isolé, connecteur connu</td><td>Isolation, débit et ID « à confirmer séparément » d'après la fiche</td><td>À demander</td></tr>
@@ -509,7 +504,7 @@
     <li>Le prix DDP comprend-il la TVA et les droits français ? Facture au nom de l'université, paiement sur bon de commande possible ?</li>
     <li>Câble CAN fourni ? Consommation du BMS en veille ?</li>
   </ul></div>
-  <div class="card"><h3>Bilan</h3><p><b>Batteries Manly retenues.</b> Les caractéristiques électriques répondent au besoin et le prix est inférieur à celui des PowerBrick+, gardées en secours si le délai de livraison est trop long. Les ID CAN identiques ne bloquent plus : chaque batterie a sa propre interface USB-CAN. Pour l'université, vérifier aussi que le service achats peut payer un fournisseur hors Union européenne.</p></div>
+  <div class="card"><h3>Bilan</h3><p><b>Batteries Manly retenues.</b> Les caractéristiques électriques répondent au besoin, et l'état de charge se lit sur le bus CAN. Les ID CAN identiques ne bloquent plus : chaque batterie a sa propre interface USB-CAN. Pour l'université, vérifier aussi que le service achats peut payer un fournisseur hors Union européenne.</p></div>
 </div>
 
 <h2>Recharge : mode d'emploi</h2>
@@ -522,7 +517,7 @@
 
 <h2>Points à vérifier</h2>
 <div class="grid">
-  <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la PowerBrick+ et pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>Manly (retenues) : état de charge sur le bus CAN confirmé par le protocole ; ID identiques sur les deux batteries, d'où une interface USB-CAN par batterie (U3 voie 2 et U7). PowerBrick+ (secours) : pas d'état de charge sur le bus CAN.</li><li>Délai Manly : 15 à 20 jours ouvrés plus 12 à 15 jours de transport. S'il dépasse le planning, commander les PowerBrick+ chez Wattuneed.</li></ul></div>
+  <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>État de charge sur le bus CAN confirmé par le protocole ; ID identiques sur les deux batteries, d'où une interface USB-CAN par batterie (U3 voie 2 et U7).</li><li>Délai Manly : 15 à 20 jours ouvrés plus 12 à 15 jours de transport, à intégrer au planning.</li></ul></div>
   <div class="card warn"><h3>Roues CTM300-7</h3><ul><li>Seuil de coupure basse des variateurs : la batterie descend vers 20 V en fin de décharge.</li><li>Capacité d'entrée des variateurs : si l'appel de courant est fort, il faut ajouter une précharge en parallèle sur K1 (à valider avec RoboCT).</li><li>Courant maximal par roue pour confirmer les fusibles de 15 A.</li></ul></div>
   <div class="card warn"><h3>Jetson</h3><ul><li>Brochage et connecteur de l'entrée Micro-Fit 9–28 V du kit de développement (guide NVIDIA), et réglage de U4 à 24 V.</li><li>Fonctionnement des CANalyst-II U3 et U7 sur la Raspberry Pi 3 (Linux ARM) avec <code>python-can[canalystii]</code> : latence à mesurer avec les roues.</li></ul></div>
   <div class="card warn"><h3>Audio</h3><ul><li>Annulation d'écho : le micro U5 doit recevoir ce que la sculpture dit. Envoyer le son vers la sortie de U5 (carte son USB du reSpeaker) puis, par le jack 3,5 mm, vers les enceintes U6. Si le son part directement vers les enceintes en USB, la sculpture s'entendra parler. Vérifier dans la documentation Seeed que la sortie jack sert bien de référence d'écho.</li><li>Consommation ajoutée au Jetson : environ 10 W par l'USB (enceintes au volume maximal). BAT-B garde plus de 4 h d'autonomie (≈ 1 000 Wh utiles pour ≈ 170 W).</li><li>Placer le micro en hauteur, loin des enceintes et des roues.</li></ul></div>

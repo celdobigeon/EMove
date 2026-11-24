@@ -1,6 +1,6 @@
 # Alimentation et câblage
 
-Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A (PowerBrick+ en secours si le délai de livraison est trop long), deux circuits séparés, une seule prise de recharge.
+Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A, deux circuits séparés, une seule prise de recharge.
 
 - **Circuit A, traction** : BAT-A alimente les 4 roues. L'arrêt d'urgence mécanique (contacteur K1) coupe ce circuit, et ce circuit seulement. Après un arrêt d'urgence ou une recharge, la traction ne revient qu'après un appui sur le bouton de réarmement RA (relais de maintien K2).
 - **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ses périphériques, les Raspberry Pi et la commande du son.
@@ -16,7 +16,7 @@ Liste des articles à commander, par fournisseur, avec le lien de chaque article
 
 Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifact/BQt3Wj4pTv8n3fSTWZw6n2) (accès sur partage).
 
-## Batteries Manly (retenues) : documents du fabricant
+## Batteries Manly : documents du fabricant
 
 - [Fiche technique MLP2450A, 25,6 V 50 Ah](batteries_manly/MANLY_25.6V_50Ah_Datasheet.pdf)
 - [Protocole CAN du BMS (JBD)](batteries_manly/CAN_JBD.pdf) : 250 kbit/s, ID standard de 0x100 à 0x112, interrogation par trame « remote » (RTR), CRC-16 Modbus. Les deux batteries répondent aux mêmes ID : voir la section « Devis Manly » du [PDF](Alimentation_cablage.pdf).
@@ -41,7 +41,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
 |---|---|---|---|---|---|---|
-| CH1 | Chargeur 24 V | Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441) | 1 | Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly comme aux PowerBrick+. Reste hors de la plateforme. | 195,83 € HT | [lien](https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html) |
+| CH1 | Chargeur 24 V | Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441) | 1 | Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly (charge conseillée 29,0 V ; 28,4 V ménage les cellules). Reste hors de la plateforme. | 195,83 € HT | [lien](https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html) |
 | D1 | Répartiteur de charge | Victron Argo FET 100-3, ARG100301020R (Conrad 1846191) | 1 | 2 sorties utilisées. Relier sa borne GND au 0 V. | ≈ 115 € (est.) | [lien](https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html) |
 | U4 | Convertisseur isolé 24 → 24 V | Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865) | 1 | Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A). | ≈ 140–190 € (est.) | [lien](https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865) |
 | U2 | Convertisseur isolé 24 → 12 V | Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873) | 1 | Pour les équipements en 12 V. Facultatif. | ≈ 70 € (est.) | [lien](https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html) |
@@ -74,12 +74,11 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | — | Câbles d'alimentation des Raspberry Pi | RUNCCI-YUN, micro-USB mâle vers 2 fils nus, 22 AWG, 30 cm, lot de 6 | 1 lot | Relient chaque abaisseur U8 (5,1 V) à l'entrée micro-USB d'une Raspberry Pi 3. Fils de 22 AWG pour limiter la chute de tension. Deux de rechange. | 7,99 € TTC | [Amazon](https://www.amazon.fr/dp/B0CWNTZMG2) |
 | — | Câble USB de l'Arduino | UGREEN, USB-A vers USB-B, 1 m | 1 | Relie l'Arduino U11 à la Raspberry Pi 3 de commande (données et 5 V). Pour une Arduino Uno ou Mega ; à changer si le modèle a un autre connecteur (Nano : mini- ou micro-USB). | 5,84 € TTC | [Amazon](https://www.amazon.fr/dp/B086ZHLW5T) |
 
-**Fournisseur 2 : batteries Manly (retenues), PowerBrick+ en secours**
+**Fournisseur 2 : batteries Manly**
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
 |---|---|---|---|---|---|---|
-| BAT-A, BAT-B | Batterie LiFePO4 25,6 V 50 Ah (Manly), **retenue** | Manly MLP2450A avec CAN (protocole BMS JBD) | 2 | **Le niveau de charge se lit sur le bus CAN**, par la Raspberry Pi 3 qui pilote les roues (une interface USB-CAN par batterie : U3 et U7), qui le transmet au Jetson. BMS 50 A en continu, 60 A en pointe (< 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport. | 298 USD pièce 994 USD les 2, port DDP compris | [lien](https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html) · [gamme robots](https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html) |
-| Secours | Batterie LiFePO4 25,6 V 50 Ah (Wattuneed) | PowerTech Systems PowerBrick+ PB+24/50 (marque française) | 2 | **À commander seulement si le délai de Manly est trop long.** Disponible en France. BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg. Pas d'état de charge sur le bus CAN : U7 devient inutile. | 685 € TTC pièce | [lien](https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html) |
+| BAT-A, BAT-B | Batterie LiFePO4 25,6 V 50 Ah (Manly) | Manly MLP2450A avec CAN (protocole BMS JBD) | 2 | **Le niveau de charge se lit sur le bus CAN**, par la Raspberry Pi 3 qui pilote les roues (une interface USB-CAN par batterie : U3 et U7), qui le transmet au Jetson. BMS 50 A en continu, 60 A en pointe (< 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport. | 298 USD pièce 994 USD les 2, port DDP compris | [lien](https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html) · [gamme robots](https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html) |
 
 **Fournisseur 3 : RS Components France**
 
