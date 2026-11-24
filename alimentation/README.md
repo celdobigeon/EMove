@@ -10,6 +10,8 @@ Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A (PowerBrick+ en secours si 
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
 
+Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifact/BQt3Wj4pTv8n3fSTWZw6n2) (accès sur partage).
+
 ## Batteries Manly (retenues) : documents du fabricant
 
 - [Fiche technique MLP2450A, 25,6 V 50 Ah](batteries_manly/MANLY_25.6V_50Ah_Datasheet.pdf)
