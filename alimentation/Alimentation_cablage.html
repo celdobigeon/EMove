@@ -41,6 +41,7 @@
   .can { stroke: var(--can); stroke-width: 2; fill: none; stroke-dasharray: 8 5; }
   .usb { stroke: var(--usb); stroke-width: 1.6; fill: none; stroke-dasharray: 4 4; }
   .aud { stroke: #8e44ad; stroke-width: 1.8; fill: none; }
+  .eth { stroke: #d35400; stroke-width: 1.8; fill: none; }
   .panel { stroke: #888; stroke-width: 1.5; stroke-dasharray: 6 4; }
   .zone { fill: none; stroke: #b9bec6; stroke-width: 1; stroke-dasharray: 3 4; }
   text { font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif; fill: #1d1d1f; }
@@ -281,6 +282,12 @@
   <text x="913" y="386" class="ts" text-anchor="middle">WIWAV WDH-8GT-DC</text>
   <text x="913" y="398" class="ts" text-anchor="middle">RJ45 : 4 × Pi 3 et U1</text>
 
+  <!-- Cordons Ethernet RJ45 Cat 6 : SW1 vers le Jetson U1 et vers les 4 Raspberry Pi 3 -->
+  <path d="M890 345 V284 H1286 V372 H1278" class="eth"/>
+  <text x="1150" y="280" class="ts" text-anchor="middle" fill="#d35400">RJ45 Cat 6 → U1 Jetson</text>
+  <path d="M982 400 H1004 V535 H1098 V528 H1108" class="eth"/>
+  <text x="1013" y="465" class="ts" fill="#d35400" transform="rotate(90 1013 465)" text-anchor="middle">4 × RJ45 → Pi 3</text>
+
   <!-- Audio : micro et enceintes, alimentés par l'USB du Jetson -->
   <rect x="845" y="418" width="150" height="46" class="load"/>
   <text x="920" y="434" class="t b" text-anchor="middle">U5 micro 4 voies</text>
@@ -339,6 +346,7 @@
     <use href="#gnd" x="620" y="-6"/><text x="634" y="4" class="ts">vers la barre 0 V</text>
     <rect x="760" y="-7" width="30" height="14" class="fuse"/><line x1="760" y1="0" x2="790" y2="0" stroke="#333" stroke-width="1"/><text x="798" y="4" class="ts">fusible</text>
     <path d="M870 0 H900" class="aud"/><text x="908" y="4" class="ts">audio analogique</text>
+    <path d="M1030 0 H1060" class="eth"/><text x="1068" y="4" class="ts">Ethernet (RJ45)</text>
   </g>
 </svg>
 </div>
