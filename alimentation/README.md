@@ -12,7 +12,7 @@ Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A, deux circuits séparés, u
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
 
-Liste des articles à commander, par fournisseur, avec le lien de chaque article : [PDF](Liste_commande_EMove.pdf).
+Liste des articles à commander, par fournisseur, avec le lien de chaque article : [PDF](Liste_commande_E_Pur_Si_Muove.pdf).
 
 Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifact/BQt3Wj4pTv8n3fSTWZw6n2) (accès sur partage).
 

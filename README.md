@@ -1,4 +1,4 @@
-# EMove
+# E Pur Si Muove
 
 Plateforme mobile à 4 roues mecanum RoboCT CTM300-7 (24 V), pilotée par un kit NVIDIA Jetson AGX Thor et des Raspberry Pi 3, avec micro et enceintes pour dialoguer avec la sculpture.
 
