@@ -73,8 +73,8 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="95" y="312" text-anchor="middle">BAT-A</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="330" text-anchor="middle">LiFePO4</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="345" text-anchor="middle">25,6 V 50 Ah</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="360" text-anchor="middle">A : PowerBrick+</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="375" text-anchor="middle">B : Manly + CAN</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="360" text-anchor="middle">Manly MLP2450A</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="95" y="375" text-anchor="middle">secours PowerBrick+</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="142" y="316">+</text><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="142" y="390">−</text>
 
   <path stroke="#d0312d" stroke-width="2.6" fill="none" d="M150 320 H170"/>
@@ -149,8 +149,8 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="755" y="312" text-anchor="middle">BAT-B</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="330" text-anchor="middle">LiFePO4</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="345" text-anchor="middle">25,6 V 50 Ah</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="360" text-anchor="middle">A : PowerBrick+</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="375" text-anchor="middle">B : Manly + CAN</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="360" text-anchor="middle">Manly MLP2450A</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="755" y="375" text-anchor="middle">secours PowerBrick+</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="802" y="316">+</text><text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="802" y="390">−</text>
 
   <path stroke="#d0312d" stroke-width="2.6" fill="none" d="M810 320 H830"/>
@@ -204,7 +204,7 @@
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="545" width="170" height="52"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="562" text-anchor="middle">U3 interface USB-CAN</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II (déjà possédée)</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="590" text-anchor="middle">voie 1 : roues · voie 2 : BMS</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="590" text-anchor="middle">voie 1 : roues · voie 2 : BAT-A</text>
   <path stroke="#8a8f98" stroke-width="1.6" fill="none" stroke-dasharray="4 4" d="M1278 331 H1294 V571 H1278"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1298" y="455" transform="rotate(90 1298 455)" text-anchor="middle">USB</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="960" y="618" text-anchor="middle">retours − du circuit B → barre 0 V</text>
@@ -215,15 +215,21 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1246" y="625">120 Ω</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="10.5px" x="985" y="682" text-anchor="middle" fill="#138a4b">Bus CAN 1 (débit des roues, CANopen) : roues M1–M4 ↔ U3 voie 1</text>
 
-  <!-- ============ BUS CAN 2 : BMS des batteries Manly (option B, voie 2 de U3) ============ -->
-  <g opacity="0.7">
-    <path stroke="#138a4b" stroke-width="2" fill="none" stroke-dasharray="8 5" d="M95 400 V650 H656 a8 8 0 0 1 16 0 H1160 V597 M755 400 V650"/>
-    <circle cx="755" cy="650" r="3" fill="#138a4b"/>
-  </g>
+  <!-- ============ BUS CAN 2 : BMS de BAT-A (voie 2 de U3) ============ -->
+  <path stroke="#138a4b" stroke-width="2" fill="none" stroke-dasharray="8 5" d="M95 400 V650 H656 a8 8 0 0 1 16 0 H1160 V597"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="101" y="644">120 Ω</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1154" y="625" text-anchor="end">120 Ω</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="10.5px" x="400" y="667" text-anchor="middle" fill="#138a4b">Bus CAN 2, 250 kbit/s (option B Manly) : BMS de BAT-A et BAT-B ↔ U3 voie 2</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="400" y="681" text-anchor="middle">les deux BMS ont les mêmes ID : voir « Devis Manly »</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="10.5px" x="400" y="667" text-anchor="middle" fill="#138a4b">Bus CAN 2, 250 kbit/s : BMS de BAT-A ↔ U3 voie 2</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="400" y="681" text-anchor="middle">une interface par BMS : les deux batteries ont les mêmes ID CAN</text>
+
+  <!-- ============ BUS CAN 3 : BMS de BAT-B (voie 1 de U7) ============ -->
+  <path stroke="#138a4b" stroke-width="2" fill="none" stroke-dasharray="8 5" d="M755 400 V578 H840"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="761" y="572">120 Ω</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" font-size="10.5px" x="761" y="592" fill="#138a4b">bus CAN 3</text>
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="840" y="552" width="140" height="50"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="910" y="568" text-anchor="middle">U7 interface USB-CAN</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="910" y="582" text-anchor="middle">CANalyst-II n° 2 · 250 kbit/s</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="910" y="595" text-anchor="middle">USB → U1 · voie 1 : BAT-B</text>
 
   <!-- ============ BARRE 0 V ============ -->
   <path stroke="#1d1d1f" stroke-width="2.6" fill="none" d="M150 385 H170 V735"/>

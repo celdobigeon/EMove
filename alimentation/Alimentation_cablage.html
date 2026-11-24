@@ -150,8 +150,8 @@
   <text x="95" y="312" class="t b" text-anchor="middle">BAT-A</text>
   <text x="95" y="330" class="ts" text-anchor="middle">LiFePO4</text>
   <text x="95" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
-  <text x="95" y="360" class="ts" text-anchor="middle">A : PowerBrick+</text>
-  <text x="95" y="375" class="ts" text-anchor="middle">B : Manly + CAN</text>
+  <text x="95" y="360" class="ts" text-anchor="middle">Manly MLP2450A</text>
+  <text x="95" y="375" class="ts" text-anchor="middle">secours PowerBrick+</text>
   <text x="142" y="316" class="ts">+</text><text x="142" y="390" class="ts">−</text>
 
   <path d="M150 320 H170" class="pos"/>
@@ -226,8 +226,8 @@
   <text x="755" y="312" class="t b" text-anchor="middle">BAT-B</text>
   <text x="755" y="330" class="ts" text-anchor="middle">LiFePO4</text>
   <text x="755" y="345" class="ts" text-anchor="middle">25,6 V 50 Ah</text>
-  <text x="755" y="360" class="ts" text-anchor="middle">A : PowerBrick+</text>
-  <text x="755" y="375" class="ts" text-anchor="middle">B : Manly + CAN</text>
+  <text x="755" y="360" class="ts" text-anchor="middle">Manly MLP2450A</text>
+  <text x="755" y="375" class="ts" text-anchor="middle">secours PowerBrick+</text>
   <text x="802" y="316" class="ts">+</text><text x="802" y="390" class="ts">−</text>
 
   <path d="M810 320 H830" class="pos"/>
@@ -281,7 +281,7 @@
   <rect x="1108" y="545" width="170" height="52" class="load"/>
   <text x="1193" y="562" class="t b" text-anchor="middle">U3 interface USB-CAN</text>
   <text x="1193" y="576" class="ts" text-anchor="middle">CANalyst-II (déjà possédée)</text>
-  <text x="1193" y="590" class="ts" text-anchor="middle">voie 1 : roues · voie 2 : BMS</text>
+  <text x="1193" y="590" class="ts" text-anchor="middle">voie 1 : roues · voie 2 : BAT-A</text>
   <path d="M1278 331 H1294 V571 H1278" class="usb"/>
   <text x="1298" y="455" class="ts" transform="rotate(90 1298 455)" text-anchor="middle">USB</text>
   <text x="960" y="618" class="ts" text-anchor="middle">retours − du circuit B → barre 0 V</text>
@@ -292,15 +292,21 @@
   <text x="1246" y="625" class="ts">120 Ω</text>
   <text x="985" y="682" class="ts" text-anchor="middle" fill="var(--can)">Bus CAN 1 (débit des roues, CANopen) : roues M1–M4 ↔ U3 voie 1</text>
 
-  <!-- ============ BUS CAN 2 : BMS des batteries Manly (option B, voie 2 de U3) ============ -->
-  <g opacity="0.7">
-    <path d="M95 400 V650 H656 a8 8 0 0 1 16 0 H1160 V597 M755 400 V650" class="can"/>
-    <circle cx="755" cy="650" r="3" fill="var(--can)"/>
-  </g>
+  <!-- ============ BUS CAN 2 : BMS de BAT-A (voie 2 de U3) ============ -->
+  <path d="M95 400 V650 H656 a8 8 0 0 1 16 0 H1160 V597" class="can"/>
   <text x="101" y="644" class="ts">120 Ω</text>
   <text x="1154" y="625" class="ts" text-anchor="end">120 Ω</text>
-  <text x="400" y="667" class="ts" text-anchor="middle" fill="var(--can)">Bus CAN 2, 250 kbit/s (option B Manly) : BMS de BAT-A et BAT-B ↔ U3 voie 2</text>
-  <text x="400" y="681" class="ts" text-anchor="middle">les deux BMS ont les mêmes ID : voir « Devis Manly »</text>
+  <text x="400" y="667" class="ts" text-anchor="middle" fill="var(--can)">Bus CAN 2, 250 kbit/s : BMS de BAT-A ↔ U3 voie 2</text>
+  <text x="400" y="681" class="ts" text-anchor="middle">une interface par BMS : les deux batteries ont les mêmes ID CAN</text>
+
+  <!-- ============ BUS CAN 3 : BMS de BAT-B (voie 1 de U7) ============ -->
+  <path d="M755 400 V578 H840" class="can"/>
+  <text x="761" y="572" class="ts">120 Ω</text>
+  <text x="761" y="592" class="ts" fill="var(--can)">bus CAN 3</text>
+  <rect x="840" y="552" width="140" height="50" class="load"/>
+  <text x="910" y="568" class="t b" text-anchor="middle">U7 interface USB-CAN</text>
+  <text x="910" y="582" class="ts" text-anchor="middle">CANalyst-II n° 2 · 250 kbit/s</text>
+  <text x="910" y="595" class="ts" text-anchor="middle">USB → U1 · voie 1 : BAT-B</text>
 
   <!-- ============ BARRE 0 V ============ -->
   <path d="M150 385 H170 V735" class="neg"/>
@@ -330,10 +336,10 @@
     <tr><td colspan="7"><span class="tag">Déjà possédé</span></td></tr>
     <tr><td class="r">M1–M4</td><td>Roues motorisées</td><td>RoboCT CTM300-7 (24 V)</td><td>4</td><td>Déjà en place sur la plateforme.</td><td>—</td><td><a href="https://www.roboct-global.com/mobile-robot-components/mecanum-wheel/mecanum-omni-wheel.html" target="_blank" rel="noopener">RoboCT</a></td></tr>
     <tr><td class="r">U1</td><td>Calculateur</td><td>NVIDIA Jetson AGX Thor, kit de développement (T5000)</td><td>1</td><td>Alimenté par son entrée Micro-Fit 9–28 V continu (8 A max), à travers U4. Vérifier le brochage du connecteur Micro-Fit dans le guide NVIDIA.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B0FTM2LXSF" target="_blank" rel="noopener">Amazon</a></td></tr>
-    <tr><td class="r">U3</td><td>Interface USB-CAN</td><td>CANalyst-II (ZLGCANpro)</td><td>1</td><td>Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : bus des BMS Manly (option B), à 250 kbit/s. Sous Linux, pilote non officiel <code>python-can[canalystii]</code> (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B07WC1XX1S" target="_blank" rel="noopener">Amazon</a></td></tr>
+    <tr><td class="r">U3</td><td>Interface USB-CAN</td><td>CANalyst-II (ZLGCANpro)</td><td>1</td><td>Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : BMS de BAT-A, à 250 kbit/s. Sous Linux, pilote non officiel <code>python-can[canalystii]</code> (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B07WC1XX1S" target="_blank" rel="noopener">Amazon</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)</span></td></tr>
-    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux deux options de batteries. Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
+    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly comme aux PowerBrick+. Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">D1</td><td>Répartiteur de charge</td><td>Victron Argo FET 100-3, ARG100301020R (Conrad 1846191)</td><td>1</td><td>2 sorties utilisées. Relier sa borne GND au 0 V.</td><td>≈ 115 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U4</td><td>Convertisseur isolé 24 → 24 V</td><td>Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865)</td><td>1</td><td>Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A).</td><td>≈ 140–190 € (est.)</td><td><a href="https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U2</td><td>Convertisseur isolé 24 → 12 V</td><td>Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873)</td><td>1</td><td>Pour les équipements en 12 V. Facultatif.</td><td>≈ 70 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html" target="_blank" rel="noopener">lien</a></td></tr>
@@ -343,16 +349,17 @@
     <tr><td class="r">X1, X2</td><td>Connecteur de charge</td><td>Connecteur de batterie à courant fort 50 A (Conrad 1229364)</td><td>2</td><td>X1 au bout du câble du chargeur, X2 fixé sur la paroi.</td><td>≈ 10 € pièce (est.)</td><td><a href="https://www.conrad.fr/fr/p/connecteur-de-batterie-a-courant-fort-50-a-1229364-1-pc-s-1229364.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">ES</td><td>Arrêt d'urgence</td><td>Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553)</td><td>1</td><td>Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson).</td><td>≈ 40 € (est.)</td><td><a href="https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">K3</td><td>Relais de détection de charge</td><td>Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788)</td><td>1</td><td>Utiliser le contact NF de l'inverseur.</td><td>17,49 € HT</td><td><a href="https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html" target="_blank" rel="noopener">lien</a></td></tr>
-    <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (deux bus avec l'option B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
+    <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (trois bus : roues, BMS de BAT-A, BMS de BAT-B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 4 : Amazon.fr (audio, pour dialoguer avec la sculpture)</span></td></tr>
     <tr><td class="r">U5</td><td>Micro à 4 voies</td><td>Seeed Studio reSpeaker XVF3800, réseau de 4 micros USB, carte nue</td><td>1</td><td>4 micros MEMS sur 360°, captation jusqu'à 5 m. Traitement intégré : annulation d'écho, formation de faisceau, direction de la voix, détection de parole, réduction de bruit. Vu comme un micro USB standard, sans pilote, compatible Jetson. Branché sur un port USB du Jetson, qui l'alimente. Carte nue : prévoir un boîtier ou une fixation.</td><td>134,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B0FKGFXQQ5" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">U6</td><td>Enceintes 2.0</td><td>Creative Pebble V3, USB-C, Bluetooth 5.0</td><td>1</td><td>8 W RMS (16 W crête), alimentées en 5 V par l'USB du Jetson. Entrée audio : de préférence le jack 3,5 mm relié à la sortie son de U5, pour que l'annulation d'écho du micro reçoive ce que dit la sculpture (voir « Points à vérifier »). Câble jack 3,5 mm mâle-mâle à prévoir s'il n'est pas dans la boîte.</td><td>29,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B08F5BQZL8" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">—</td><td>Câbles USB</td><td>Anker 331, USB-A vers USB-C, 1,8 m, lot de 2</td><td>1 lot</td><td>Un câble pour U5, un pour U6. Le lien a été donné deux fois : un lot de 2 câbles suffit.</td><td>8,11 € TTC</td><td><a href="https://www.amazon.fr/dp/B07DC5PPFV" target="_blank" rel="noopener">Amazon</a></td></tr>
+    <tr><td class="r">U7</td><td>Seconde interface USB-CAN</td><td>CANalyst-II (ZLGCANpro), identique à U3</td><td>1</td><td>Les deux batteries Manly répondent aux mêmes ID CAN : chacune a donc son propre bus. Voie 1 : BMS de BAT-B, à 250 kbit/s, terminaisons 120 Ω aux deux bouts. Voie 2 libre. Même pilote que U3 sous Linux.</td><td>97,00 € TTC</td><td><a href="https://www.amazon.fr/dp/B07WC1XX1S" target="_blank" rel="noopener">Amazon</a></td></tr>
 
-    <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries, deux options au choix</span></td></tr>
-    <tr><td class="r">Option A</td><td>Batterie LiFePO4 25,6 V 50 Ah (Wattuneed)</td><td>PowerTech Systems PowerBrick+ PB+24/50 (marque française)</td><td>2</td><td>BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg.</td><td>685 € TTC pièce</td><td><a href="https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html" target="_blank" rel="noopener">lien</a></td></tr>
-    <tr><td class="r">Option B</td><td>Batterie LiFePO4 25,6 V 50 Ah (Manly)</td><td>Manly MLP2450A avec CAN (protocole BMS JBD)</td><td>2</td><td><b>Avantage : le niveau de charge se lit sur le bus CAN</b>, donc par le Jetson. BMS 50 A en continu, 60 A en pointe (&lt; 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport.</td><td>298 USD pièce<br>994 USD les 2, port DDP compris</td><td><a href="https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html" target="_blank" rel="noopener">lien</a> · <a href="https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html" target="_blank" rel="noopener">gamme robots</a></td></tr>
+    <tr><td colspan="7"><span class="tag">Fournisseur 2 : batteries Manly (retenues), PowerBrick+ en secours</span></td></tr>
+    <tr><td class="r">BAT-A, BAT-B</td><td>Batterie LiFePO4 25,6 V 50 Ah (Manly), <b>retenue</b></td><td>Manly MLP2450A avec CAN (protocole BMS JBD)</td><td>2</td><td><b>Le niveau de charge se lit sur le bus CAN</b>, donc par le Jetson (une interface USB-CAN par batterie : U3 et U7). BMS 50 A en continu, 60 A en pointe (&lt; 1 s), IP67, 6 000 cycles à 80 %, garantie 5 ans, bornes M6. 330 × 172 × 237 mm, 10,3 kg. Charge à 29,0 V. Devis reçu : livraison DDP par avion, délai de 15 à 20 jours ouvrés plus 12 à 15 jours de transport.</td><td>298 USD pièce<br>994 USD les 2, port DDP compris</td><td><a href="https://www.manlybatteries.com/24v-lifepo4-battery/lithium-24v-50ah-battery.html" target="_blank" rel="noopener">lien</a> · <a href="https://www.manlybatteries.com/24v-lifepo4-battery/battery-for-autonomous-mobile-robots.html" target="_blank" rel="noopener">gamme robots</a></td></tr>
+    <tr><td class="r">Secours</td><td>Batterie LiFePO4 25,6 V 50 Ah (Wattuneed)</td><td>PowerTech Systems PowerBrick+ PB+24/50 (marque française)</td><td>2</td><td><b>À commander seulement si le délai de Manly est trop long.</b> Disponible en France. BMS intégré, 50 A en continu, 1,28 kWh, IP65, plus de 3 000 cycles. 260 × 168 × 212 mm, 11,8 kg. Pas d'état de charge sur le bus CAN : U7 devient inutile.</td><td>685 € TTC pièce</td><td><a href="https://www.wattuneed.com/fr/batteries-lithium/15121-batterie-lithium-powerbrick-pb2450-50-ah-256-v-lifepo4-128-kwh-ip65-0768563816338.html" target="_blank" rel="noopener">lien</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 3 : RS Components France</span></td></tr>
     <tr><td class="r">K1</td><td>Contacteur de puissance</td><td>Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538)</td><td>1</td><td>Seul article introuvable chez Conrad. Délai de livraison à vérifier.</td><td>161,08 € HT</td><td><a href="https://fr.rs-online.com/web/p/contacteurs/1058538" target="_blank" rel="noopener">lien</a></td></tr>
@@ -377,10 +384,10 @@
 <tr><td>Câbles, câble CAN, cosses</td><td>≈ 100–145 € (est.)</td></tr>
 <tr><th>Total Conrad</th><th>≈ 960–1 050 € TTC</th></tr>
 </table></div>
-<div class="card"><h3>Fournisseur 2 : batteries (au choix)</h3>
+<div class="card"><h3>Fournisseur 2 : batteries</h3>
 <table>
-<tr><td>Option A : 2 × PowerBrick+ 24 V 50 Ah (Wattuneed)</td><td>1 370 € TTC</td></tr>
-<tr><td>Option B : 2 × Manly MLP2450A avec CAN, devis DDP (596 USD + 398 USD de port)</td><td>994 USD, soit ≈ 850–920 €</td></tr>
+<tr><td><b>Retenu :</b> 2 × Manly MLP2450A avec CAN, devis DDP (596 USD + 398 USD de port)</td><td>994 USD, soit ≈ 850–920 €</td></tr>
+<tr><td>Secours : 2 × PowerBrick+ 24 V 50 Ah (Wattuneed), si le délai Manly est trop long</td><td>1 370 € TTC</td></tr>
 </table>
 <h3 style="margin-top:14px">Fournisseur 3 : RS France</h3>
 <table>
@@ -392,14 +399,15 @@
 <tr><td>Micro reSpeaker XVF3800</td><td>134,99 €</td></tr>
 <tr><td>Enceintes Creative Pebble V3</td><td>29,99 €</td></tr>
 <tr><td>Câbles USB Anker, lot de 2</td><td>8,11 €</td></tr>
-<tr><th>Total Amazon</th><th>≈ 173 € TTC</th></tr>
+<tr><td>Seconde interface CANalyst-II (U7)</td><td>97,00 €</td></tr>
+<tr><th>Total Amazon</th><th>≈ 270 € TTC</th></tr>
 </table></div>
 <div class="card warn"><h3>Total général</h3>
-<p><b>≈ 2 700 – 2 790 € TTC avec l'option A.</b><br><b>≈ 2 180 – 2 340 € avec l'option B</b>, si le prix DDP de Manly inclut bien la TVA et les droits d'import (à confirmer). Audio compris (≈ 173 €). Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II).</p>
+<p><b>≈ 2 275 – 2 435 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Avec les batteries de secours PowerBrick+, sans U7 : ≈ 2 700 – 2 790 € TTC. Audio et seconde interface CAN compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II).</p>
 <ul style="margin-top:8px"><li>Les batteries font environ 40 à 50 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
 </div>
 
-<h2>Devis Manly (option B) : conformité</h2>
+<h2>Devis Manly (batteries retenues) : conformité</h2>
 <p class="sub">Comparaison du devis, de la fiche technique MLP2450A et du protocole CAN (BMS JBD) avec les besoins de la plateforme.</p>
 <div class="scroll">
 <table>
@@ -412,7 +420,7 @@
     <tr><td class="r">Température</td><td>Pas de charge sous 0 °C</td><td>Charge 0 à 45 °C, protection basse température dans le BMS</td><td>Conforme</td></tr>
     <tr><td class="r">Niveau de charge</td><td>Lisible par le Jetson</td><td>CAN : état de charge en %, tension, courant, capacité restante, cycles, températures, tension de chaque cellule, défauts</td><td>Conforme, avec les réserves d'intégration ci-dessous</td></tr>
     <tr><td class="r">Encombrement, masse</td><td>Logement à prévoir</td><td>330 × 172 × 237 mm, 10,3 kg</td><td>Plus léger que la PowerBrick+ (11,8 kg) mais plus long de 70 mm : vérifier l'implantation</td></tr>
-    <tr><td class="r">Robustesse</td><td>Usage en intérieur, robot</td><td>IP67, 6 000 cycles à 80 %, garantie 5 ans</td><td>Conforme, meilleur que l'option A</td></tr>
+    <tr><td class="r">Robustesse</td><td>Usage en intérieur, robot</td><td>IP67, 6 000 cycles à 80 %, garantie 5 ans</td><td>Conforme, meilleur que la PowerBrick+</td></tr>
     <tr><td class="r">Raccordement</td><td>Cosses 10 mm² et 6 mm²</td><td>2 bornes M6</td><td>Conforme : cosses à œillet M6</td></tr>
     <tr><td class="r">Coupure basse</td><td>Connue, pour régler l'arrêt du Jetson</td><td>Non indiquée</td><td>À demander</td></tr>
     <tr><td class="r">Port CAN</td><td>Isolé, connecteur connu</td><td>Isolation, débit et ID « à confirmer séparément » d'après la fiche</td><td>À demander</td></tr>
@@ -425,17 +433,17 @@
   <div class="card warn"><h3>Intégration CAN : ce qui change</h3><ul>
     <li>Le BMS parle à 250 kbit/s avec des ID fixes de 0x100 à 0x112. Le Jetson doit envoyer une trame « remote » (RTR) par ID, et la batterie répond. Chaque réponse contient 6 octets et un CRC-16 Modbus.</li>
     <li>Le débit des roues n'est sans doute pas le même, et l'ID 0x100 est réservé en CANopen (TIME). <b>Les BMS ne vont donc pas sur le bus des roues</b> : ils ont leur propre bus, sur la voie 2 du CANalyst-II.</li>
-    <li><b>Les deux batteries répondent aux mêmes ID.</b> Sur un même bus, leurs réponses entrent en collision. Il faut que Manly programme des ID différents sur la seconde batterie ; sinon, il faut une voie CAN par batterie (seconde interface USB-CAN).</li>
+    <li><b>Les deux batteries répondent aux mêmes ID.</b> Sur un même bus, leurs réponses entrent en collision. <b>Solution retenue : un bus par batterie.</b> BAT-A est lue par la voie 2 de U3, BAT-B par une seconde interface CANalyst-II (U7). Si Manly peut programmer des ID différents, U7 devient inutile.</li>
   </ul></div>
   <div class="card warn"><h3>Questions à poser à Manly</h3><ul>
-    <li>ID CAN différents pour les deux batteries (par exemple décalés de 0x20) : possible en usine ?</li>
+    <li>ID CAN différents pour les deux batteries (par exemple décalés de 0x20) : possible en usine ? Sans cela, la seconde interface U7 règle le problème.</li>
     <li>Port CAN : isolation galvanique, connecteur et brochage, résistance de 120 Ω intégrée ou non.</li>
     <li>Seuils de coupure basse tension et de reprise ; tenue au courant d'appel à la mise sous tension.</li>
     <li>Certificat UN38.3 et FDS pour le transport aérien.</li>
     <li>Le prix DDP comprend-il la TVA et les droits français ? Facture au nom de l'université, paiement sur bon de commande possible ?</li>
     <li>Câble CAN fourni ? Consommation du BMS en veille ?</li>
   </ul></div>
-  <div class="card"><h3>Bilan</h3><p>Les caractéristiques électriques répondent au besoin et le prix est inférieur à l'option A. Il reste un point bloquant à régler avec Manly avant de commander : les ID CAN identiques des deux batteries. Pour l'université, vérifier aussi que le service achats peut payer un fournisseur hors Union européenne.</p></div>
+  <div class="card"><h3>Bilan</h3><p><b>Batteries Manly retenues.</b> Les caractéristiques électriques répondent au besoin et le prix est inférieur à celui des PowerBrick+, gardées en secours si le délai de livraison est trop long. Les ID CAN identiques ne bloquent plus : chaque batterie a sa propre interface USB-CAN. Pour l'université, vérifier aussi que le service achats peut payer un fournisseur hors Union européenne.</p></div>
 </div>
 
 <h2>Recharge : mode d'emploi</h2>
@@ -448,7 +456,7 @@
 
 <h2>Points à vérifier</h2>
 <div class="grid">
-  <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la PowerBrick+ et pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>Option A (PowerBrick+) : pas d'état de charge sur le bus CAN. Option B (Manly) : état de charge sur le bus CAN confirmé par le protocole, mais ID identiques sur les deux batteries.</li></ul></div>
+  <div class="card warn"><h3>Batteries</h3><ul><li>Le BMS doit tenir au moins 50 A en continu (calibre de F1) : 50 A annoncés pour la PowerBrick+ et pour la Manly.</li><li>Charge interdite en dessous de 0 °C : le BMS doit la bloquer (confirmé pour la Manly).</li><li>Manly (retenues) : état de charge sur le bus CAN confirmé par le protocole ; ID identiques sur les deux batteries, d'où une interface USB-CAN par batterie (U3 voie 2 et U7). PowerBrick+ (secours) : pas d'état de charge sur le bus CAN.</li><li>Délai Manly : 15 à 20 jours ouvrés plus 12 à 15 jours de transport. S'il dépasse le planning, commander les PowerBrick+ chez Wattuneed.</li></ul></div>
   <div class="card warn"><h3>Roues CTM300-7</h3><ul><li>Seuil de coupure basse des variateurs : la batterie descend vers 20 V en fin de décharge.</li><li>Capacité d'entrée des variateurs : si l'appel de courant est fort, il faut ajouter une précharge en parallèle sur K1 (à valider avec RoboCT).</li><li>Courant maximal par roue pour confirmer les fusibles de 15 A.</li></ul></div>
   <div class="card warn"><h3>Jetson</h3><ul><li>Brochage et connecteur de l'entrée Micro-Fit 9–28 V du kit de développement (guide NVIDIA), et réglage de U4 à 24 V.</li><li>Fonctionnement du CANalyst-II sous Linux ARM avec <code>python-can[canalystii]</code> : latence à mesurer avec les roues.</li></ul></div>
   <div class="card warn"><h3>Audio</h3><ul><li>Annulation d'écho : le micro U5 doit recevoir ce que la sculpture dit. Envoyer le son vers la sortie de U5 (carte son USB du reSpeaker) puis, par le jack 3,5 mm, vers les enceintes U6. Si le son part directement vers les enceintes en USB, la sculpture s'entendra parler. Vérifier dans la documentation Seeed que la sortie jack sert bien de référence d'écho.</li><li>Consommation ajoutée au Jetson : environ 10 W par l'USB (enceintes au volume maximal). BAT-B garde plus de 4 h d'autonomie (≈ 1 000 Wh utiles pour ≈ 170 W).</li><li>Placer le micro en hauteur, loin des enceintes et des roues.</li></ul></div>
