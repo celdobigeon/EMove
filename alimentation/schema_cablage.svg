@@ -186,8 +186,13 @@
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="442" text-anchor="middle">→ caméras, lidar, routeur</text>
 
   <path stroke="#d0312d" stroke-width="2.6" fill="none" d="M1035 500 H1048"/><rect fill="#fff" stroke="#333" stroke-width="1.2" x="1048" y="493" width="40" height="14"/><line x1="1048" y1="500" x2="1088" y2="500" stroke="#333" stroke-width="1"/>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1068" y="488" text-anchor="middle">F23 10 A</text><path stroke="#d0312d" stroke-width="2.6" fill="none" d="M1088 500 H1108"/>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1114" y="504">réserve (24 V périphériques)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1068" y="488" text-anchor="middle">F23 3 A</text><path stroke="#d0312d" stroke-width="2.6" fill="none" d="M1088 500 H1108"/>
+  <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="460" width="170" height="78"/>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="476" text-anchor="middle">U8 abaisseurs LM2596 (×2)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="491" text-anchor="middle">U8a → 5,1 V : U9 Raspberry Pi</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="505" text-anchor="middle">(commande, déjà possédée)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="519" text-anchor="middle">U8b → commande du son</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="532" text-anchor="middle">2 A max par module · 0,75 mm²</text>
 
   <!-- Audio : micro et enceintes, alimentés par l'USB du Jetson -->
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="845" y="418" width="150" height="46"/>

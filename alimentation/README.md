@@ -3,9 +3,10 @@
 Deux batteries LiFePO4 25,6 V / 50 Ah Manly MLP2450A (PowerBrick+ en secours si le délai de livraison est trop long), deux circuits séparés, une seule prise de recharge.
 
 - **Circuit A, traction** : BAT-A alimente les 4 roues. L'arrêt d'urgence mécanique (contacteur K1) coupe ce circuit, et ce circuit seulement.
-- **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ainsi que ses périphériques.
+- **Circuit B, calcul** : BAT-B alimente le Jetson à travers un convertisseur isolé 24 → 24 V (U4), ses périphériques, la Raspberry Pi et la commande du son.
 - **Recharge** : le chargeur se branche sur le socle X2. Le répartiteur D1 recharge les deux batteries en même temps. Tant que le chargeur est branché, le relais K3 bloque la traction.
 - **Audio** : un micro à 4 voies (reSpeaker XVF3800) et des enceintes USB (Creative Pebble V3), branchés sur le Jetson, pour dialoguer avec la sculpture. Le son passe par la sortie jack du micro pour que l'annulation d'écho fonctionne.
+- **Commande** : une Raspberry Pi (déjà possédée) commande la sculpture. Elle est alimentée en 5,1 V par un abaisseur LM2596 (U8a) branché sur le circuit B ; un second abaisseur (U8b) alimente la commande du son.
 - **CAN** : la voie 1 du CANalyst-II U3 pilote les roues. Les deux batteries Manly répondent aux mêmes ID CAN : chacune a donc son bus, à 250 kbit/s. BAT-A est lue par la voie 2 de U3, BAT-B par un second CANalyst-II (U7).
 
 Document complet : [page HTML](Alimentation_cablage.html) (à télécharger puis ouvrir dans un navigateur) ou [PDF](Alimentation_cablage.pdf).
@@ -21,8 +22,6 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 
 ![Schéma de câblage](schema_cablage.svg)
 
-## Nomenclature
-
 **Déjà possédé**
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
@@ -30,6 +29,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | M1–M4 | Roues motorisées | RoboCT CTM300-7 (24 V) | 4 | Déjà en place sur la plateforme. | — | [RoboCT](https://www.roboct-global.com/mobile-robot-components/mecanum-wheel/mecanum-omni-wheel.html) |
 | U1 | Calculateur | NVIDIA Jetson AGX Thor, kit de développement (T5000) | 1 | Alimenté par son entrée Micro-Fit 9–28 V continu (8 A max), à travers U4. Vérifier le brochage du connecteur Micro-Fit dans le guide NVIDIA. | — | [Amazon](https://www.amazon.fr/dp/B0FTM2LXSF) |
 | U3 | Interface USB-CAN | CANalyst-II (ZLGCANpro) | 1 | Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : BMS de BAT-A, à 250 kbit/s. Sous Linux, pilote non officiel `python-can[canalystii]` (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson. | — | [Amazon](https://www.amazon.fr/dp/B07WC1XX1S) |
+| U9 | Carte de commande | Raspberry Pi (modèle à préciser) | 1 | Alimentée en 5,1 V par l'abaisseur U8a, depuis le circuit B. Le courant à fournir dépend du modèle : voir « Points à vérifier ». | — | — |
 
 **Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)**
 
@@ -41,13 +41,13 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | U2 | Convertisseur isolé 24 → 12 V | Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873) | 1 | Pour les équipements en 12 V. Facultatif. | ≈ 70 € (est.) | [lien](https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html) |
 | S1, S2 | Coupe-batteries | Victron 275 A, VBS127010010 | 2 | Placés après le point de charge : les batteries se rechargent même interrupteurs ouverts. | 47,99 € pièce | [rayon Victron](https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html) |
 | F0, F1, F2 | Porte-fusibles MIDI | Victron CIP000050001 | 3 | Au plus près des bornes + (F1, F2) et derrière X2 (F0). Fusibles MIDI : 50 A pour F1, 30 A pour F0 et F2. | 16,99 € pièce + fusibles | [rayon Victron](https://www.conrad.fr/fr/o/accessoires-de-chargeur-0501180.html) |
-| DB-A, DB-B | Distribution à fusibles | Barre Victron VBB125040010 (Conrad 2497142) et porte-fusibles pour fusibles plats standard, 32 V | 1 + 7 | La barre sert de répartiteur pour la traction ; chaque départ a son porte-fusible plat. DB-A : 4 × 15 A. DB-B : 20 A (U4), 5 A (U2), 10 A (réserve). | ≈ 60 € (est.) | [barre](https://www.conrad.fr/fr/p/victron-energy-bus-bar-vbb125040010-plaque-de-montage-2497142.html) · [porte-fusibles](https://www.conrad.fr/fr/f/porte-fusible-plat-1838146.html) |
+| DB-A, DB-B | Distribution à fusibles | Barre Victron VBB125040010 (Conrad 2497142) et porte-fusibles pour fusibles plats standard, 32 V | 1 + 7 | La barre sert de répartiteur pour la traction ; chaque départ a son porte-fusible plat. DB-A : 4 × 15 A. DB-B : 20 A (U4), 5 A (U2), 3 A (U8, abaisseurs). | ≈ 60 € (est.) | [barre](https://www.conrad.fr/fr/p/victron-energy-bus-bar-vbb125040010-plaque-de-montage-2497142.html) · [porte-fusibles](https://www.conrad.fr/fr/f/porte-fusible-plat-1838146.html) |
 | X1, X2 | Connecteur de charge | Connecteur de batterie à courant fort 50 A (Conrad 1229364) | 2 | X1 au bout du câble du chargeur, X2 fixé sur la paroi. | ≈ 10 € pièce (est.) | [lien](https://www.conrad.fr/fr/p/connecteur-de-batterie-a-courant-fort-50-a-1229364-1-pc-s-1229364.html) |
 | ES | Arrêt d'urgence | Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553) | 1 | Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson). | ≈ 40 € (est.) | [lien](https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553) |
 | K3 | Relais de détection de charge | Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788) | 1 | Utiliser le contact NF de l'inverseur. | 17,49 € HT | [lien](https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html) |
 | — | Câblage | Câble souple rouge et noir, câble CAN blindé, cosses | — | 10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (trois bus : roues, BMS de BAT-A, BMS de BAT-B). | ≈ 100–145 € (est.) | [Conrad](https://www.conrad.fr/) |
 
-**Fournisseur 4 : Amazon.fr (audio, pour dialoguer avec la sculpture)**
+**Fournisseur 4 : Amazon.fr (audio, interface CAN, abaisseurs)**
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
 |---|---|---|---|---|---|---|
@@ -55,6 +55,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | U6 | Enceintes 2.0 | Creative Pebble V3, USB-C, Bluetooth 5.0 | 1 | 8 W RMS (16 W crête), alimentées en 5 V par l'USB du Jetson. Entrée audio : de préférence le jack 3,5 mm relié à la sortie son de U5, pour que l'annulation d'écho du micro reçoive ce que dit la sculpture (voir « Points à vérifier »). Câble jack 3,5 mm mâle-mâle à prévoir s'il n'est pas dans la boîte. | 29,99 € TTC | [Amazon](https://www.amazon.fr/dp/B08F5BQZL8) |
 | — | Câbles USB | Anker 331, USB-A vers USB-C, 1,8 m, lot de 2 | 1 lot | Un câble pour U5, un pour U6. Le lien a été donné deux fois : un lot de 2 câbles suffit. | 8,11 € TTC | [Amazon](https://www.amazon.fr/dp/B07DC5PPFV) |
 | U7 | Seconde interface USB-CAN | CANalyst-II (ZLGCANpro), identique à U3 | 1 | Les deux batteries Manly répondent aux mêmes ID CAN : chacune a donc son propre bus. Voie 1 : BMS de BAT-B, à 250 kbit/s, terminaisons 120 Ω aux deux bouts. Voie 2 libre. Même pilote que U3 sous Linux. | 97,00 € TTC | [Amazon](https://www.amazon.fr/dp/B07WC1XX1S) |
+| U8 | Abaisseurs de tension | CAIHINIER QY-11LM2596S, régulateur DC-DC LM2596, lot de 4 | 1 lot | Entrée 4–40 V, sortie réglable de 1,25 à 37 V par potentiomètre, 2 A max, bornes à vis, non isolé. Alimentés par F23 (3 A) depuis DB-B. U8a : 5,1 V pour la Raspberry Pi U9. U8b : commande du son, tension à préciser. Deux modules de rechange. Régler la tension au multimètre avant de brancher la charge. | 12,99 € TTC | [Amazon](https://www.amazon.fr/dp/B0HFHT9BVJ) |
 
 **Fournisseur 2 : batteries Manly (retenues), PowerBrick+ en secours**
 
