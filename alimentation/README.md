@@ -33,7 +33,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | U3 | Interface USB-CAN | CANalyst-II (ZLGCANpro) | 1 | Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : BMS de BAT-A, à 250 kbit/s. Sous Linux, pilote non officiel `python-can[canalystii]` (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson. | — | [Amazon](https://www.amazon.fr/dp/B07WC1XX1S) |
 | U9 | Carte de commande | Raspberry Pi 4 Model B | 1 | Alimentée en 5,1 V par l'abaisseur U8a, depuis le circuit B, par son entrée USB-C. Raspberry Pi conseille une alimentation de 5,1 V et 3 A. Sans périphérique USB, la carte consomme environ 0,6 à 1,3 A ; ses ports USB peuvent tirer jusqu'à 1,2 A de plus. U8a (2 A max) convient donc si aucun périphérique USB gourmand n'y est branché : voir « Points à vérifier ». | — | — |
 
-**Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)**
+**Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage, caméras)**
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
 |---|---|---|---|---|---|---|
@@ -48,6 +48,7 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 | ES | Arrêt d'urgence | Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553) | 1 | Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson). | ≈ 40 € (est.) | [lien](https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553) |
 | K3 | Relais de détection de charge | Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788) | 1 | Utiliser le contact NF de l'inverseur. | 17,49 € HT | [lien](https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html) |
 | — | Câblage | Câble souple rouge et noir, câble CAN blindé, cosses | — | 10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (trois bus : roues, BMS de BAT-A, BMS de BAT-B). | ≈ 100–145 € (est.) | [Conrad](https://www.conrad.fr/) |
+| U10 | Caméras grand angle | Raspberry Pi Camera Module 3 Wide, SC1224 (Conrad 2751821) | 4 | Capteur Sony IMX708, 11,9 Mpx, champ de 120° (102° × 67°), mise au point automatique, HDR. Vidéo 1080p50. Nappe de 200 mm fournie. Une Raspberry Pi 4 n'a qu'un port caméra CSI : une seule caméra peut y être branchée directement ; pour en relier plusieurs à la même carte, il faut un multiplexeur de caméras. Version infrarouge pour la faible lumière : SC1226. | 36,66 € HT pièce 146,64 € HT les 4 | [lien](https://www.conrad.fr/fr/p/raspberry-pi-sc1224-camera-module-3-wide-module-de-camera-couleur-cmos-convient-pour-kits-de-developpement-raspb-2751821.html) |
 
 **Fournisseur 4 : Amazon.fr (audio, interface CAN, abaisseurs)**
 

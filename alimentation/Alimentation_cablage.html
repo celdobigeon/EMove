@@ -344,7 +344,7 @@
     <tr><td class="r">U3</td><td>Interface USB-CAN</td><td>CANalyst-II (ZLGCANpro)</td><td>1</td><td>Deux voies CAN, isolées d'après le vendeur. Voie 1 : bus des roues. Voie 2 : BMS de BAT-A, à 250 kbit/s. Sous Linux, pilote non officiel <code>python-can[canalystii]</code> (pyusb), qui interroge le boîtier en boucle : la latence et l'envoi de trames « remote » (RTR) sont à tester sur le Jetson.</td><td>—</td><td><a href="https://www.amazon.fr/dp/B07WC1XX1S" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">U9</td><td>Carte de commande</td><td>Raspberry Pi 4 Model B</td><td>1</td><td>Alimentée en 5,1 V par l'abaisseur U8a, depuis le circuit B, par son entrée USB-C. Raspberry Pi conseille une alimentation de 5,1 V et 3 A. Sans périphérique USB, la carte consomme environ 0,6 à 1,3 A ; ses ports USB peuvent tirer jusqu'à 1,2 A de plus. U8a (2 A max) convient donc si aucun périphérique USB gourmand n'y est branché : voir « Points à vérifier ».</td><td>—</td><td>—</td></tr>
 
-    <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage)</span></td></tr>
+    <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage, caméras)</span></td></tr>
     <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly comme aux PowerBrick+. Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">D1</td><td>Répartiteur de charge</td><td>Victron Argo FET 100-3, ARG100301020R (Conrad 1846191)</td><td>1</td><td>2 sorties utilisées. Relier sa borne GND au 0 V.</td><td>≈ 115 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U4</td><td>Convertisseur isolé 24 → 24 V</td><td>Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865)</td><td>1</td><td>Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A).</td><td>≈ 140–190 € (est.)</td><td><a href="https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865" target="_blank" rel="noopener">lien</a></td></tr>
@@ -356,6 +356,7 @@
     <tr><td class="r">ES</td><td>Arrêt d'urgence</td><td>Schneider Harmony XB5AS8444, coup de poing Ø40, 2 NF (Conrad 1983553)</td><td>1</td><td>Un contact NF coupe la bobine de K1 ; le second reste libre (par exemple pour signaler l'arrêt au Jetson).</td><td>≈ 40 € (est.)</td><td><a href="https://www.conrad.fr/p/arret-durgence-schneider-electric-xb5as8444-xb5as8444-1-pcs-1983553" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">K3</td><td>Relais de détection de charge</td><td>Finder 38.51.7.024.0050, bobine 24 V, 1 inverseur, rail DIN (Conrad 502788)</td><td>1</td><td>Utiliser le contact NF de l'inverseur.</td><td>17,49 € HT</td><td><a href="https://www.conrad.fr/fr/p/relais-de-base-finder-385170240050-385170240050-1-tension-nominale-24-vdc-courant-de-commutation-max-6-a-1-inverseur-rt-1-pcs-502788.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (trois bus : roues, BMS de BAT-A, BMS de BAT-B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
+    <tr><td class="r">U10</td><td>Caméras grand angle</td><td>Raspberry Pi Camera Module 3 Wide, SC1224 (Conrad 2751821)</td><td>4</td><td>Capteur Sony IMX708, 11,9 Mpx, champ de 120° (102° × 67°), mise au point automatique, HDR. Vidéo 1080p50. Nappe de 200 mm fournie. Une Raspberry Pi 4 n'a qu'un port caméra CSI : une seule caméra peut y être branchée directement ; pour en relier plusieurs à la même carte, il faut un multiplexeur de caméras. Version infrarouge pour la faible lumière : SC1226.</td><td>36,66 € HT pièce<br>146,64 € HT les 4</td><td><a href="https://www.conrad.fr/fr/p/raspberry-pi-sc1224-camera-module-3-wide-module-de-camera-couleur-cmos-convient-pour-kits-de-developpement-raspb-2751821.html" target="_blank" rel="noopener">lien</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 4 : Amazon.fr (audio, interface CAN, abaisseurs)</span></td></tr>
     <tr><td class="r">U5</td><td>Micro à 4 voies</td><td>Seeed Studio reSpeaker XVF3800, réseau de 4 micros USB, carte nue</td><td>1</td><td>4 micros MEMS sur 360°, captation jusqu'à 5 m. Traitement intégré : annulation d'écho, formation de faisceau, direction de la voix, détection de parole, réduction de bruit. Vu comme un micro USB standard, sans pilote, compatible Jetson. Branché sur un port USB du Jetson, qui l'alimente. Carte nue : prévoir un boîtier ou une fixation.</td><td>134,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B0FKGFXQQ5" target="_blank" rel="noopener">Amazon</a></td></tr>
@@ -389,7 +390,8 @@
 <tr><td>2 connecteurs 50 A</td><td>≈ 20 € (est.)</td></tr>
 <tr><td>Arrêt d'urgence et relais Finder</td><td>≈ 60 €</td></tr>
 <tr><td>Câbles, câble CAN, cosses</td><td>≈ 100–145 € (est.)</td></tr>
-<tr><th>Total Conrad</th><th>≈ 960–1 050 € TTC</th></tr>
+<tr><td>4 caméras Camera Module 3 Wide (U10)</td><td>≈ 176 € TTC</td></tr>
+<tr><th>Total Conrad</th><th>≈ 1 135–1 225 € TTC</th></tr>
 </table></div>
 <div class="card"><h3>Fournisseur 2 : batteries</h3>
 <table>
@@ -409,9 +411,10 @@
 <tr><td>Interface CANalyst-II (U7), 2 exemplaires</td><td>194,00 €</td></tr>
 <tr><td>Abaisseurs LM2596, 5 lots de 4 (U8)</td><td>64,95 €</td></tr>
 <tr><th>Total Amazon</th><th>≈ 440 € TTC</th></tr>
-</table></div>
+</table>
+</div>
 <div class="card warn"><h3>Total général</h3>
-<p><b>≈ 2 445 – 2 605 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Avec les batteries de secours PowerBrick+, sans U7 : ≈ 2 775 – 2 865 € TTC. Audio, seconde interface CAN et abaisseurs compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II, Raspberry Pi).</p>
+<p><b>≈ 2 620 – 2 780 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Avec les batteries de secours PowerBrick+, sans U7 : ≈ 2 950 – 3 040 € TTC. Audio, seconde interface CAN, abaisseurs et caméras compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, CANalyst-II, Raspberry Pi).</p>
 <ul style="margin-top:8px"><li>Les batteries font environ 40 à 50 % du budget selon l'option.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
 </div>
 
