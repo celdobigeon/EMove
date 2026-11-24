@@ -75,6 +75,6 @@ Suivi des commandes et des livraisons : [page de suivi](https://claude.ai/artifa
 
 | Repère | Désignation | Référence | Qté | Caractéristiques, remarques | Prix indicatif | Lien |
 |---|---|---|---|---|---|---|
-| K1 | Contacteur de puissance | Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538) | 1 | Seul article introuvable chez Conrad. Délai de livraison à vérifier. | 161,08 € HT | [lien](https://fr.rs-online.com/web/p/contacteurs/1058538) |
+| K1 | Contacteur de puissance | Durakool DEVR10-5061-S8-1024-R1, 100 A, bobine 24 V continu (RS 105-8538) | 1 | Seul article commandé chez RS : ni Conrad ni Amazon n'ont de contacteur équivalent. Conrad ne propose que des relais à souder sur circuit imprimé ; Amazon, des copies d'Albright SW80 de vendeurs inconnus, à éviter pour la coupure d'arrêt d'urgence. Délai de livraison à vérifier. | 161,08 € HT | [lien](https://fr.rs-online.com/web/p/contacteurs/1058538) |
 
 Les références sont des exemples à confirmer auprès des fournisseurs avant la commande. Les prix ont été relevés en novembre 2026 et n'incluent pas toujours la livraison.
