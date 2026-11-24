@@ -224,7 +224,7 @@
 
   <rect fill="#eef3fb" stroke="#333" stroke-width="1.2" x="1108" y="545" width="170" height="52"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#1d1d1f" font-size="12px" font-weight="700" x="1193" y="562" text-anchor="middle">U3 interface USB-CAN</text>
-  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II (déjà possédée)</text>
+  <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="576" text-anchor="middle">CANalyst-II n° 1 · USB → U1</text>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1193" y="590" text-anchor="middle">voie 1 : roues · voie 2 : BAT-A</text>
   <path stroke="#8a8f98" stroke-width="1.6" fill="none" stroke-dasharray="4 4" d="M1278 331 H1294 V571 H1278"/>
   <text font-family="system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif" fill="#444" font-size="10.5px" x="1298" y="455" transform="rotate(90 1298 455)" text-anchor="middle">USB</text>
