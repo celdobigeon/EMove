@@ -383,7 +383,6 @@
     <tr><td class="r">US</td><td>Capteurs à ultrasons étanches</td><td>DFRobot SEN0208 (JSN-SR04T V3.0)</td><td>à préciser</td><td>Détection de personnes et d'objets, avec les caméras. Mesure de 25 cm à 4,5 m, cône de 60°, alimentation 3 à 5 V, 40 mA. Sorties trigger et echo vers l'Arduino U11 ; câble de 2,5 m. Zone aveugle sous 25 cm.</td><td>—</td><td><a href="https://www.gotronic.fr/art-capteur-etanche-a-ultrasons-sen0208-25729.htm" target="_blank" rel="noopener">Gotronic</a></td></tr>
 
     <tr><td colspan="7"><span class="tag">Fournisseur 1 : Conrad.fr (énergie Victron, commande, câblage, caméras)</span></td></tr>
-    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), BPC241642002 (Conrad 1924441)</td><td>1</td><td>Programme LiFePO4 (28,4 V), Bluetooth. Convient aux batteries Manly (charge conseillée 29,0 V ; 28,4 V ménage les cellules). Reste hors de la plateforme.</td><td>195,83 € HT</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-chargeur-pour-batteries-au-plomb-blue-smart-2416-24-v-courant-de-charge-max-16-a-1924441.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">D1</td><td>Répartiteur de charge</td><td>Victron Argo FET 100-3, ARG100301020R (Conrad 1846191)</td><td>1</td><td>2 sorties utilisées. Relier sa borne GND au 0 V.</td><td>≈ 115 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-argo-fet-100-3-arg100301020r-separateur-de-batterie-1846191.html" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U4</td><td>Convertisseur isolé 24 → 24 V</td><td>Victron Orion-Tr 24/24-12A, 280 W, isolé (Conrad 1666865)</td><td>1</td><td>Alimente le Jetson en 24 V stabilisé : une batterie LiFePO4 en charge monte à 28,4–29,2 V, au-delà des 28 V admis par le kit Thor. 280 W suffisent (Jetson ≤ 8 A).</td><td>≈ 140–190 € (est.)</td><td><a href="https://www.conrad.fr/p/victron-energy-orion-tr-2424-12a-280w-isolated-dc-dc-converter-convertisseur-cccc-24-vdc-24-vdc12-a-280-w-1666865" target="_blank" rel="noopener">lien</a></td></tr>
     <tr><td class="r">U2</td><td>Convertisseur isolé 24 → 12 V</td><td>Victron Orion-Tr 24/12-10, 120 W (Conrad 1666873)</td><td>1</td><td>Pour les équipements en 12 V. Facultatif.</td><td>≈ 70 € (est.)</td><td><a href="https://www.conrad.fr/fr/p/victron-energy-orion-tr-24-12-10-convertisseur-cc-cc-24-v-dc-12-5-v-dc-12-a-120-w-1666873.html" target="_blank" rel="noopener">lien</a></td></tr>
@@ -400,7 +399,8 @@
     <tr><td class="r">—</td><td>Câblage</td><td>Câble souple rouge et noir, câble CAN blindé, cosses</td><td>—</td><td>10 mm² entre BAT-A et la distribution ; 6 mm² pour la charge et le circuit B ; 2,5 mm² vers les roues et U4 ; 0,75 mm² pour la boucle d'arrêt d'urgence, les abaisseurs U8, le switch SW1 et l'Arduino. Câble CAN : paire torsadée blindée, terminaisons 120 Ω aux deux bouts de chaque bus (trois bus : roues, BMS de BAT-A, BMS de BAT-B).</td><td>≈ 100–145 € (est.)</td><td><a href="https://www.conrad.fr/" target="_blank" rel="noopener">Conrad</a></td></tr>
     <tr><td class="r">U10</td><td>Caméras grand angle</td><td>Raspberry Pi Camera Module 3 Wide, SC1224 (Conrad 2751821)</td><td>4</td><td>Capteur Sony IMX708, 11,9 Mpx, champ de 120° (102° × 67°), mise au point automatique, HDR. Vidéo 1080p50. Nappe de 200 mm fournie. Les 4 caméras doivent filmer en même temps : chacune a sa Raspberry Pi 3 (U9), qui n'a qu'un port caméra CSI. Caméra compatible avec la Pi 3 : même port CSI à 15 broches, nappe fournie. Version infrarouge pour la faible lumière : SC1226.</td><td>36,66 € HT pièce<br>146,64 € HT les 4</td><td><a href="https://www.conrad.fr/fr/p/raspberry-pi-sc1224-camera-module-3-wide-module-de-camera-couleur-cmos-convient-pour-kits-de-developpement-raspb-2751821.html" target="_blank" rel="noopener">lien</a></td></tr>
 
-    <tr><td colspan="7"><span class="tag">Fournisseur 4 : Amazon.fr (audio, interface CAN, abaisseurs, réseau)</span></td></tr>
+    <tr><td colspan="7"><span class="tag">Fournisseur 4 : Amazon.fr (chargeur, audio, interfaces CAN, abaisseurs, réseau)</span></td></tr>
+    <tr><td class="r">CH1</td><td>Chargeur 24 V</td><td>Victron Blue Smart IP22 24/16 (1), 1 sortie, Bluetooth (BPC241642002)</td><td>1</td><td>Programme LiFePO4, Bluetooth. Convient aux batteries Manly (charge conseillée 29,0 V ; 28,4 V ménage les cellules). Reste hors de la plateforme. Indisponible chez Conrad (novembre 2026) ; vendu sur Amazon par Techno Sun, distributeur Victron.</td><td>183,67 € TTC</td><td><a href="https://www.amazon.fr/dp/B08KFLZ4NK" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">U5</td><td>Micro à 4 voies</td><td>Seeed Studio reSpeaker XVF3800, réseau de 4 micros USB, carte nue</td><td>1</td><td>4 micros MEMS sur 360°, captation jusqu'à 5 m. Traitement intégré : annulation d'écho, formation de faisceau, direction de la voix, détection de parole, réduction de bruit. Vu comme un micro USB standard, sans pilote, compatible Jetson. Branché sur un port USB du Jetson, qui l'alimente. Carte nue : prévoir un boîtier ou une fixation.</td><td>134,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B0FKGFXQQ5" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">U6</td><td>Enceintes 2.0</td><td>Creative Pebble V3, USB-C, Bluetooth 5.0</td><td>1</td><td>8 W RMS (16 W crête), alimentées en 5 V par l'USB du Jetson. Entrée audio : de préférence le jack 3,5 mm relié à la sortie son de U5, pour que l'annulation d'écho du micro reçoive ce que dit la sculpture (voir « Points à vérifier »). Câble jack 3,5 mm mâle-mâle à prévoir s'il n'est pas dans la boîte.</td><td>29,99 € TTC</td><td><a href="https://www.amazon.fr/dp/B08F5BQZL8" target="_blank" rel="noopener">Amazon</a></td></tr>
     <tr><td class="r">—</td><td>Câbles USB</td><td>Anker 331, USB-A vers USB-C, 1,8 m, lot de 2</td><td>2 lots</td><td>Soit 4 câbles : un pour U5, un pour U6, deux en réserve.</td><td>8,11 € le lot<br>16,22 € les 2</td><td><a href="https://www.amazon.fr/dp/B07DC5PPFV" target="_blank" rel="noopener">Amazon</a></td></tr>
@@ -426,7 +426,6 @@
 <div class="grid">
 <div class="card"><h3>Fournisseur 1 : Conrad.fr</h3>
 <table>
-<tr><td>Chargeur Blue Smart IP22 24/16 (1)</td><td>≈ 235 € TTC</td></tr>
 <tr><td>Répartiteur Argo FET 100-3</td><td>≈ 115 € (est.)</td></tr>
 <tr><td>Convertisseur Orion-Tr 24/24-12A isolé</td><td>≈ 140–190 € (est.)</td></tr>
 <tr><td>Convertisseur Orion-Tr 24/12-10</td><td>≈ 70 € (est.)</td></tr>
@@ -438,7 +437,7 @@
 <tr><td>Câbles, câble CAN, cosses</td><td>≈ 100–145 € (est.)</td></tr>
 <tr><td>4 caméras Camera Module 3 Wide (U10)</td><td>≈ 176 € TTC</td></tr>
 <tr><td>Réarmement (relais K2, bouton RA), diodes, rail DIN</td><td>≈ 42 € TTC</td></tr>
-<tr><th>Total Conrad</th><th>≈ 1 175–1 270 € TTC</th></tr>
+<tr><th>Total Conrad</th><th>≈ 940–1 035 € TTC</th></tr>
 </table></div>
 <div class="card"><h3>Fournisseur 2 : batteries</h3>
 <table>
@@ -451,6 +450,7 @@
 </table>
 <h3 style="margin-top:14px">Fournisseur 4 : Amazon.fr</h3>
 <table>
+<tr><td>Chargeur Victron Blue Smart IP22 24/16 (1)</td><td>183,67 €</td></tr>
 <tr><td>Micro reSpeaker XVF3800</td><td>134,99 €</td></tr>
 <tr><td>Enceintes Creative Pebble V3</td><td>29,99 €</td></tr>
 <tr><td>Câbles USB Anker, 2 lots de 2</td><td>16,22 €</td></tr>
@@ -460,11 +460,11 @@
 <tr><td>4 cartes microSD SanDisk Extreme 64 Go</td><td>95,96 €</td></tr>
 <tr><td>Cordons réseau Cat 6 blindés 1 m, lot de 5</td><td>14,65 €</td></tr>
 <tr><td>Câbles micro-USB à fils nus et câble USB de l'Arduino</td><td>13,83 €</td></tr>
-<tr><th>Total Amazon</th><th>≈ 645 € TTC</th></tr>
+<tr><th>Total Amazon</th><th>≈ 830 € TTC</th></tr>
 </table>
 </div>
 <div class="card warn"><h3>Total général</h3>
-<p><b>≈ 2 865 – 3 025 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Audio, interfaces CAN, abaisseurs, caméras, réseau et microSD compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, 4 Raspberry Pi 3).</p>
+<p><b>≈ 2 815 – 2 975 € avec les batteries Manly</b>, si le prix DDP inclut bien la TVA et les droits d'import (à confirmer).<br>Audio, interfaces CAN, abaisseurs, caméras, réseau et microSD compris. Hors livraison Conrad, RS et Amazon, et hors matériel déjà possédé (roues, kit Jetson, 4 Raspberry Pi 3).</p>
 <ul style="margin-top:8px"><li>Les batteries font environ 30 % du budget.</li><li>Conversion du dollar au taux de novembre 2026, à recalculer à la commande.</li><li>Environ 450 € du total Conrad sont estimés : le montant exact sera connu au panier.</li><li>Le coût des câbles dépend des longueurs réelles.</li></ul></div>
 </div>
 
